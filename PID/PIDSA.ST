@@ -1,0 +1,17 @@
+PROGRAM PIDSA
+VAR_EXTERNAL
+SI01 : real;
+SI02 : real;
+SI03 : real;
+SI04 : real;
+
+PI04 : real;
+END_VAR
+
+
+VAR
+Output_3 : REAL ;
+Result : int;
+END_VAR
+;
+END_PROGRAM

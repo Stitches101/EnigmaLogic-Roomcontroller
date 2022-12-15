@@ -1,0 +1,221 @@
+
+Building resource C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\$ENV$\Resource\Resource.MAK.
+Executing Pre-Build-Steps:
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\$TASK00$.CRD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\BuildLog.txt
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\DISPLAYGLOBALVARIABLES.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\DISPLAYGLOBALVARIABLES.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\DisplayInterface.CRD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\DisplayInterface.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\DisplayInterface.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\Displayio.CRD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\Displayio.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\Displayio.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\pceData.txt
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\pceSegs.txt
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\pceVars.txt
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\pceVars.txt.xml
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIC02.CRD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIC02.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIC02.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDDyn.CRD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDDyn.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDDyn.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDEA.CRD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDEA.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDEA.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDGLOBAL.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDGLOBAL.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDHC.CRD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDHC.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDHC.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDSA.CRD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDSA.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDSA.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDSET.CRD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDSET.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDSET.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\read_IO_write_Modbus_registers.CRD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\read_IO_write_Modbus_registers.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\read_IO_write_Modbus_registers.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\read_measurements.CRD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\read_measurements.INC
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\read_measurements.OBJ
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\Resource.PCD
+Delete C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\USERTYPE.INC
+
+Creating dependency list(s): 
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\SLAVE\read_IO_write_Modbus_registers.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\read_measurements.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDEA.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDHC.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDSA.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\Displayio.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDDyn.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\DisplayInterface.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDSET.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIC02.POE
+
+Creating dependency list(s): 
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\DISPLAYGLOBALVARIABLES.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDGLOBAL.POE
+
+Compiling ...
+
+Performing syntax check on file(s): 
+C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\SLAVE\USERTYPE.typ
+0 error(s), 0 warning(s) - C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\SLAVE\USERTYPE.typ.
+
+
+Creating prototype(s): 
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\DISPLAYGLOBALVARIABLES.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDGLOBAL.POE
+
+Creating include file(s): 
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\DISPLAYGLOBALVARIABLES.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDGLOBAL.POE
+
+Compiling file(s): 
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\DISPLAYGLOBALVARIABLES.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\DISPLAYGLOBALVARIABLES.POE.
+
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDGLOBAL.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDGLOBAL.POE.
+
+
+Creating prototype(s): 
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\SLAVE\read_IO_write_Modbus_registers.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\read_measurements.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDEA.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDHC.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDSA.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\Displayio.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDDyn.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\DisplayInterface.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDSET.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIC02.POE
+
+Creating include file(s): 
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\SLAVE\read_IO_write_Modbus_registers.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\read_measurements.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDEA.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDHC.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDSA.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\Displayio.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDDyn.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\DisplayInterface.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDSET.POE
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIC02.POE
+
+Compiling file(s): 
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\SLAVE\read_IO_write_Modbus_registers.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\SLAVE\read_IO_write_Modbus_registers.POE.
+
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\read_measurements.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\read_measurements.POE.
+
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDEA.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDEA.POE.
+
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDHC.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDHC.POE.
+
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDSA.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDSA.POE.
+
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\Displayio.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\Displayio.POE.
+
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDDyn.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDDyn.POE.
+
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\DisplayInterface.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\MASTER\DisplayInterface.POE.
+
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDSET.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIDSET.POE.
+
+C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIC02.POE
+0 error(s), 0 warning(s) - C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\PID\PIC02.POE.
+
+
+Linking ...
+Linking resource globals ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\DISPLAYGLOBALVARIABLES.OBJ.
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDGLOBAL.OBJ.
+Linking task READ_IO_WRITE_MODBUS_REGISTERS ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\read_IO_write_Modbus_registers.OBJ.
+Linking: SETREGISTERF.
+Linking: GETREGISTERF.
+Linking: SETINPUTTYPEF.
+Linking: GETANALOGINPUTF.
+Linking: GETNI1000LGMEASUREMENTF.
+Linking: GETOHMMEASUREMENTF.
+Linking task READ_MEASUREMENTS ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\read_measurements.OBJ.
+Linking: SETREGISTERF.
+Linking: GETDISPLAYPOINTVALUEF.
+Linking: GETLONGREGISTERF.
+Linking: MODBUSREGISTERSFB.
+Linking: MODBUSREGISTERSFB.
+Linking task PIDEA ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDEA.OBJ.
+Linking: GETREGISTERF.
+Linking: SETANALOGOUTPUTF.
+Linking: PIDFB.
+Linking task PIDHC ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDHC.OBJ.
+Linking: GETDISPLAYPOINTVALUEF.
+Linking: GETREGISTERF.
+Linking: SETDISPLAYPOINTF.
+Linking: SETREGISTERF.
+Linking: PIDFB.
+Linking task PIDSA ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDSA.OBJ.
+Linking task DISPLAYIO ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\Displayio.OBJ.
+Linking: GETDISPLAYPOINTVALUEF.
+Linking: GETREGISTERF.
+Linking: SETDISPLAYPOINTF.
+Linking: GETANALOGOUTPUTF.
+Linking task PIDDYN ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDDyn.OBJ.
+Linking: SETANALOGOUTPUTF.
+Linking: SETDIGITALOUTPUTF.
+Linking: GETDISPLAYPOINTVALUEF.
+Linking: SETDISPLAYPOINTF.
+Linking: PIDFB.
+Linking task DISPLAYINTERFACE ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\DisplayInterface.OBJ.
+Linking: SETREGISTERF.
+Linking: GETDISPLAYPOINTVALUEF.
+Linking: SETDISPLAYPOINTF.
+Linking: SAVEREGISTERSF.
+Linking: MODBUSREGISTERSFB.
+Linking task PIDSET ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDSET.OBJ.
+Linking: GETREGISTERF.
+Linking: SETREGISTERF.
+Linking task PIC02 ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIC02.OBJ.
+Linking: GETREGISTERF.
+Linking: PIDFB.
+Linking resource: RESOURCE ...
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\$TASK00$.CRD.
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\read_IO_write_Modbus_registers.CRD.
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\read_measurements.CRD.
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDEA.CRD.
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDHC.CRD.
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDSA.CRD.
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\Displayio.CRD.
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDDyn.CRD.
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\DisplayInterface.CRD.
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIDSET.CRD.
+Linking: C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\PIC02.CRD.
+Code size in bytes: 48609.
+Number of segments: 223.
+0 error(s), 0 warning(s) - C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\Resource.PCD.
+
+VARTAB32: 55 variables added in 1 segments (2890 bytes)
+Executing Post-Build-Steps:
+padtrtpsTS610.exe "Resource.M24IEC" -pcd="C:\USERS\USER\ONEDRIVE\BACKUP\BACKUP MULTIDISPLAY MM\BACKUP MULTIDISPLAY\MULTI24\MULTI24 UNIVERSAL READER\UNIVERSAL READER\$GEN$\Resource\Resource.PCD" -mak="C:\Users\User\OneDrive\Backup\Backup Multidisplay MM\Backup Multidisplay\Multi24\multi24 universal reader\Universal reader\$ENV$\Resource\Resource.MAK"

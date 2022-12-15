@@ -1,0 +1,339 @@
+PROGRAM PIDDYN
+VAR_EXTERNAL
+DisplayAddress : usint;
+DisplayPoint74 : real;
+DisplayPoint8 : real;
+
+SI01 : real;
+SI02 : real;
+SI03 : real;
+SI04 : real;
+
+PI01 : real;
+PI02 : real; 
+PI03 : real;
+PI04 : real;
+
+HE01 : BOOL;
+CO01 : BOOL;
+
+END_VAR
+
+VAR
+PID_CONTROL : PIDFB ; (* The functionblock type: PIDFB *)
+in01 : real;
+var01 : real := 0.0;
+var02 : real := 0.0;
+var03 : real := 10.0;
+var04 : real := 2000.0;
+cal01 : real;
+cal02 : real;
+cal03 : real;
+cal04 : real;
+cal05 : real;
+Result : word;
+Result2 : int;
+y01 : real := 0.0;
+y02 : real := 100.0;
+x01 : real := 0.0;
+x02 : real;
+in02 : real;
+min01 : real := 0.0;
+max01 : real  := 2000.0;
+min02 : real := 0.0;
+max02 : real  := 50.0;
+Output_1 : REAL ;
+Output_2 : REAL ;
+
+
+END_VAR
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(** {* Heater *} **)
+(**  **)
+(** IF HE01 THEN **)
+	(* if - Cond *)
+	LD HE01
+	JMPCN ODK_SKIP_000000000000001_000000000000001
+
+		(* then - Stmts *)
+
+(** Output_1 := PI02; **)
+		(* assign - Stmt *)
+		LD PI02
+		ST Output_1
+
+(** Result2 := SetAnalogOutputF(Number:=1, Value := Output_1); **)
+		(* assign - Stmt *)
+		LD 1
+		SetAnalogOutputF Output_1
+		ST Result2
+
+		JMP ODK_END_IF_000000000000001
+
+(** 	 **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000001_000000000000001:
+
+		(* else - Stmts *)
+
+(** Output_1 := 0.0; {* returns a REAL *} {*AO01 Heating*} **)
+		(* assign - Stmt *)
+		LD 0.0
+		ST Output_1
+
+(** Result2 := SetAnalogOutputF(Number:=1, Value := Output_1); **)
+		(* assign - Stmt *)
+		LD 1
+		SetAnalogOutputF Output_1
+		ST Result2
+
+(**  **)
+(** END_IF; **)
+	(* if - End *) 
+	ODK_END_IF_000000000000001:
+
+(**  **)
+(** IF Output_1 > 1.0 THEN **)
+	(* if - Cond *)
+	LD Output_1
+	GT 1.0
+	JMPCN ODK_SKIP_000000000000002_000000000000001
+
+		(* then - Stmts *)
+
+(** Result2 := SetDigitalOutputF(Number:=1, Value := 10); **)
+		(* assign - Stmt *)
+		LD 1
+		SetDigitalOutputF 10
+		ST Result2
+
+(** Result2 := SetDigitalOutputF(Number:=2, Value := 10); **)
+		(* assign - Stmt *)
+		LD 2
+		SetDigitalOutputF 10
+		ST Result2
+
+		JMP ODK_END_IF_000000000000002
+
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000002_000000000000001:
+
+		(* else - Stmts *)
+
+(** Result2 := SetDigitalOutputF(Number:=1, Value := 0); **)
+		(* assign - Stmt *)
+		LD 1
+		SetDigitalOutputF 0
+		ST Result2
+
+(** Result2 := SetDigitalOutputF(Number:=2, Value := 0); **)
+		(* assign - Stmt *)
+		LD 2
+		SetDigitalOutputF 0
+		ST Result2
+
+(** END_IF; **)
+	(* if - End *) 
+	ODK_END_IF_000000000000002:
+
+(**  **)
+(**  **)
+(** {* Cooler  *} **)
+(**  **)
+(** IF CO01 THEN **)
+	(* if - Cond *)
+	LD CO01
+	JMPCN ODK_SKIP_000000000000003_000000000000001
+
+		(* then - Stmts *)
+
+(** Output_2 := PI03; {* returns a REAL *} {*AO02 Cooling*} **)
+		(* assign - Stmt *)
+		LD PI03
+		ST Output_2
+
+(** Result2 := SetAnalogOutputF(Number:=2, Value := Output_2); **)
+		(* assign - Stmt *)
+		LD 2
+		SetAnalogOutputF Output_2
+		ST Result2
+
+		JMP ODK_END_IF_000000000000003
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000003_000000000000001:
+
+		(* else - Stmts *)
+
+(** Output_2 := 0.0; {* returns a REAL *} {*AO02 Cooling*} **)
+		(* assign - Stmt *)
+		LD 0.0
+		ST Output_2
+
+(** Result2 := SetAnalogOutputF(Number:=2, Value := Output_2); **)
+		(* assign - Stmt *)
+		LD 2
+		SetAnalogOutputF Output_2
+		ST Result2
+
+(**  **)
+(** END_IF; **)
+	(* if - End *) 
+	ODK_END_IF_000000000000003:
+
+(**  **)
+(**  **)
+(** {* Heating - Cooling on Display *} **)
+(**  **)
+(** DisplayPoint8 := GetDisplayPointValueF(PointNumber:=8, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint8); **)
+	(* assign - Stmt *)
+	LD 8
+	GetDisplayPointValueF DisplayAddress, DisplayPoint8
+	ST DisplayPoint8
+
+(** IF Output_1 > 10.0 THEN **)
+	(* if - Cond *)
+	LD Output_1
+	GT 10.0
+	JMPCN ODK_SKIP_000000000000004_000000000000001
+
+		(* then - Stmts *)
+
+(** 	DisplayPoint8 := 1.0; **)
+		(* assign - Stmt *)
+		LD 1.0
+		ST DisplayPoint8
+
+		JMP ODK_END_IF_000000000000004
+
+(** 	 **)
+(** ELSIF Output_2 > 10.0 THEN **)
+	(* elseif - Cond *) 
+	ODK_SKIP_000000000000004_000000000000001:
+	LD Output_2
+	GT 10.0
+	JMPCN ODK_SKIP_000000000000004_000000000000002
+
+		(* elsif - Stmts *)
+
+(** 	DisplayPoint8 := 2.0; **)
+		(* assign - Stmt *)
+		LD 2.0
+		ST DisplayPoint8
+
+		JMP ODK_END_IF_000000000000004
+
+(** 	 **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000004_000000000000002:
+
+		(* else - Stmts *)
+
+(** 	DisplayPoint8 := 0.0; **)
+		(* assign - Stmt *)
+		LD 0.0
+		ST DisplayPoint8
+
+(** 	 **)
+(** END_IF; **)
+	(* if - End *) 
+	ODK_END_IF_000000000000004:
+
+(**  **)
+(** Result2 := SetDisplayPointF(PointNumber:=8, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=DisplayPoint8 ); **)
+	(* assign - Stmt *)
+	LD 8
+	SetDisplayPointF 0, 0, DisplayAddress, DisplayPoint8
+	ST Result2
+
+(**  **)
+(**  **)
+(**  **)
+(** {*in02 := MAX(Output_1,PI01,Output_2);*} **)
+(** in02 := MAX(Output_1,Output_2); **)
+	(* assign - Stmt *)
+	LD Output_1
+	MAX Output_2
+	ST in02
+
+(**  **)
+(** {* POINT74: max *} **)
+(** DisplayPoint74 := GetDisplayPointValueF(PointNumber:=74, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint74); **)
+	(* assign - Stmt *)
+	LD 74
+	GetDisplayPointValueF DisplayAddress, DisplayPoint74
+	ST DisplayPoint74
+
+(** Result2 := SetDisplayPointF(PointNumber:=74, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=DisplayPoint74 ); **)
+	(* assign - Stmt *)
+	LD 74
+	SetDisplayPointF 0, 0, DisplayAddress, DisplayPoint74
+	ST Result2
+
+(**  **)
+(** x02 := DisplayPoint74; **)
+	(* assign - Stmt *)
+	LD DisplayPoint74
+	ST x02
+
+(**  **)
+(**  **)
+(** {*Setpoint calculator MAX VAV*} **)
+(**  cal01 := y02 - y01; **)
+	(* assign - Stmt *)
+	LD y02
+	SUB y01
+	ST cal01
+
+(**  cal02 := x01 - x02; **)
+	(* assign - Stmt *)
+	LD x01
+	SUB x02
+	ST cal02
+
+(**  cal03 := cal02 / cal01; **)
+	(* assign - Stmt *)
+	LD cal02
+	DIV cal01
+	ST cal03
+
+(**  cal04 := in02 - y01; **)
+	(* assign - Stmt *)
+	LD in02
+	SUB y01
+	ST cal04
+
+(**  PI04 := x01 - (cal04 * cal03); **)
+	(* assign - Stmt *)
+	LD x01
+	SUB ( cal04
+		MUL cal03
+	)
+	ST PI04
+
+(**  **)
+(** PI04 := LIMIT(min02,PI04,x02); **)
+	(* assign - Stmt *)
+	LD min02
+	LIMIT PI04, x02
+	ST PI04
+
+(** Result2 := SetAnalogOutputF(Number:=3, Value := PI04); **)
+	(* assign - Stmt *)
+	LD 3
+	SetAnalogOutputF PI04
+	ST Result2
+
+
+END_PROGRAM

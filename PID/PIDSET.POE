@@ -1,0 +1,112 @@
+PROGRAM PIDSET
+VAR_EXTERNAL
+SI01 : real;
+SI02 : real;
+SI03 : real;
+SI04 : real;
+
+HE01 : BOOL;
+CO01 : BOOL;
+END_VAR
+
+VAR
+result : int;
+
+END_VAR
+(** SI01 := WORD_TO_REAL(GetRegisterF(RegNumber:=512)); {*SI01 == Setpoint room temperature controller)*} **)
+	(* assign - Stmt *)
+	LD 512
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST SI01
+
+(** Result := SetRegisterF(RegNumber := 512, RegValue := REAL_TO_WORD(SI01)); **)
+	(* assign - Stmt *)
+	LD 512
+	SetRegisterF ( SI01
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(**   **)
+(** SI02 := WORD_TO_REAL(GetRegisterF(RegNumber:=513)); {*SI02 == Setpoint room c02 controller)*} **)
+	(* assign - Stmt *)
+	LD 513
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST SI02
+
+(** Result := SetRegisterF(RegNumber := 513, RegValue := REAL_TO_WORD(SI02)); **)
+	(* assign - Stmt *)
+	LD 513
+	SetRegisterF ( SI02
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(**  **)
+(** SI03 := WORD_TO_REAL(GetRegisterF(RegNumber:=514)); {*SI03 == )*} **)
+	(* assign - Stmt *)
+	LD 514
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST SI03
+
+(** Result := SetRegisterF(RegNumber := 514, RegValue := REAL_TO_WORD(SI03)); **)
+	(* assign - Stmt *)
+	LD 514
+	SetRegisterF ( SI03
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(**  **)
+(** SI04 := WORD_TO_REAL(GetRegisterF(RegNumber:=515)); {*SI04 == )*} **)
+	(* assign - Stmt *)
+	LD 515
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST SI04
+
+(** Result := SetRegisterF(RegNumber := 515, RegValue := REAL_TO_WORD(SI04)); **)
+	(* assign - Stmt *)
+	LD 515
+	SetRegisterF ( SI04
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(**  **)
+(** HE01 := WORD_TO_BOOL(GetRegisterF(RegNumber:=516)); {*HE01 == Heat available*} **)
+	(* assign - Stmt *)
+	LD 516
+	GetRegisterF 
+	WORD_TO_BOOL 
+	ST HE01
+
+(** Result := SetRegisterF(RegNumber := 516, RegValue := BOOL_TO_WORD(HE01)); **)
+	(* assign - Stmt *)
+	LD 516
+	SetRegisterF ( HE01
+			BOOL_TO_WORD 
+		)
+	ST Result
+
+(**  **)
+(** CO01 := WORD_TO_BOOL(GetRegisterF(RegNumber:=517)); {*CO01 == Cool available*} **)
+	(* assign - Stmt *)
+	LD 517
+	GetRegisterF 
+	WORD_TO_BOOL 
+	ST CO01
+
+(** Result := SetRegisterF(RegNumber := 517, RegValue := BOOL_TO_WORD(CO01)); **)
+	(* assign - Stmt *)
+	LD 517
+	SetRegisterF ( CO01
+			BOOL_TO_WORD 
+		)
+	ST Result
+
+
+END_PROGRAM

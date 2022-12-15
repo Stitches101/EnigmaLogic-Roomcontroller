@@ -1,0 +1,128 @@
+PROGRAM PIDDYN
+VAR_EXTERNAL
+DisplayAddress : usint;
+DisplayPoint74 : real;
+DisplayPoint8 : real;
+
+SI01 : real;
+SI02 : real;
+SI03 : real;
+SI04 : real;
+
+PI01 : real;
+PI02 : real; 
+PI03 : real;
+PI04 : real;
+
+HE01 : BOOL;
+CO01 : BOOL;
+
+END_VAR
+
+VAR
+PID_CONTROL : PIDFB ; (* The functionblock type: PIDFB *)
+in01 : real;
+var01 : real := 0.0;
+var02 : real := 0.0;
+var03 : real := 10.0;
+var04 : real := 2000.0;
+cal01 : real;
+cal02 : real;
+cal03 : real;
+cal04 : real;
+cal05 : real;
+Result : word;
+Result2 : int;
+y01 : real := 0.0;
+y02 : real := 100.0;
+x01 : real := 0.0;
+x02 : real;
+in02 : real;
+min01 : real := 0.0;
+max01 : real  := 2000.0;
+min02 : real := 0.0;
+max02 : real  := 50.0;
+Output_1 : REAL ;
+Output_2 : REAL ;
+
+
+END_VAR
+
+
+
+
+
+
+
+(* Heater *)
+
+IF HE01 THEN
+Output_1 := PI02;
+Result2 := SetAnalogOutputF(Number:=1, Value := Output_1);
+	
+ELSE
+Output_1 := 0.0; (* returns a REAL *) (*AO01 Heating*)
+Result2 := SetAnalogOutputF(Number:=1, Value := Output_1);
+
+END_IF;
+
+IF Output_1 > 1.0 THEN
+Result2 := SetDigitalOutputF(Number:=1, Value := 10);
+Result2 := SetDigitalOutputF(Number:=3, Value := 10);
+ELSE
+Result2 := SetDigitalOutputF(Number:=1, Value := 0);
+Result2 := SetDigitalOutputF(Number:=3, Value := 0);
+END_IF;
+
+
+(* Cooler  *)
+
+IF CO01 THEN
+Output_2 := PI03; (* returns a REAL *) (*AO02 Cooling*)
+Result2 := SetAnalogOutputF(Number:=2, Value := Output_2);
+
+ELSE
+Output_2 := 0.0; (* returns a REAL *) (*AO02 Cooling*)
+Result2 := SetAnalogOutputF(Number:=2, Value := Output_2);
+
+END_IF;
+
+
+(* Heating - Cooling on Display *)
+
+DisplayPoint8 := GetDisplayPointValueF(PointNumber:=8, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint8);
+IF Output_1 > 10.0 THEN
+	DisplayPoint8 := 1.0;
+	
+ELSIF Output_2 > 10.0 THEN
+	DisplayPoint8 := 2.0;
+	
+ELSE
+	DisplayPoint8 := 0.0;
+	
+END_IF;
+
+Result2 := SetDisplayPointF(PointNumber:=8, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=DisplayPoint8 );
+
+
+
+(*in02 := MAX(Output_1,PI01,Output_2);*)
+in02 := MAX(Output_1,Output_2);
+
+(* POINT74: max *)
+DisplayPoint74 := GetDisplayPointValueF(PointNumber:=74, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint74);
+Result2 := SetDisplayPointF(PointNumber:=74, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=DisplayPoint74 );
+
+x02 := DisplayPoint74;
+
+
+(*Setpoint calculator MAX VAV*)
+ cal01 := y02 - y01;
+ cal02 := x01 - x02;
+ cal03 := cal02 / cal01;
+ cal04 := in02 - y01;
+ PI04 := x01 - (cal04 * cal03);
+
+PI04 := LIMIT(min02,PI04,x02);
+Result2 := SetAnalogOutputF(Number:=3, Value := PI04);
+END_PROGRAM

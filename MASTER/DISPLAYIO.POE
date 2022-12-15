@@ -1,0 +1,552 @@
+PROGRAM DISPLAYIO
+VAR_EXTERNAL
+DisplayAddress : usint;
+DisplayPoint50 : real;
+DisplayPoint51 : real;
+DisplayPoint52 : real;
+DisplayPoint53 : real;
+DisplayPoint54 : real;
+DisplayPoint55 : real;
+DisplayPoint56 : real;
+DisplayPoint57 : real;
+DisplayPoint58 : real;
+DisplayPoint59 : real;
+DisplayPoint60 : real;
+DisplayPoint61 : real;
+DisplayPoint62 : real;
+DisplayPoint63 : real;
+DisplayPoint64 : real;
+DisplayPoint65 : real;
+DisplayPoint66 : real;
+DisplayPoint67 : real;
+DisplayPoint68 : real;
+DisplayPoint69 : real;
+DisplayPoint70 : real;
+DisplayPoint71 : real;
+DisplayPoint72 : real;
+DisplayPoint73 : real;
+END_VAR
+
+VAR_GLOBAL
+
+END_VAR
+
+VAR
+Result : int;
+Result2 : real;
+END_VAR
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(** {* Analog/Digital Input -----------------------------------------------------------------------------------------------------------*} **)
+(**  **)
+(** {* POINT50: AI1)*} **)
+(** DisplayPoint50 := GetDisplayPointValueF(PointNumber:=50, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint50); **)
+	(* assign - Stmt *)
+	LD 50
+	GetDisplayPointValueF DisplayAddress, DisplayPoint50
+	ST DisplayPoint50
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=500)); **)
+	(* assign - Stmt *)
+	LD 500
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=50, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 50
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT51: AI2)*} **)
+(** DisplayPoint51 := GetDisplayPointValueF(PointNumber:=51, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint51); **)
+	(* assign - Stmt *)
+	LD 51
+	GetDisplayPointValueF DisplayAddress, DisplayPoint51
+	ST DisplayPoint51
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=501)); **)
+	(* assign - Stmt *)
+	LD 501
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=51, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 51
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT52: AI3)*} **)
+(** DisplayPoint52 := GetDisplayPointValueF(PointNumber:=52, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint52); **)
+	(* assign - Stmt *)
+	LD 52
+	GetDisplayPointValueF DisplayAddress, DisplayPoint52
+	ST DisplayPoint52
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=502)); **)
+	(* assign - Stmt *)
+	LD 502
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=52, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 52
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT53: AI4)*} **)
+(** DisplayPoint53 := GetDisplayPointValueF(PointNumber:=53, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint53); **)
+	(* assign - Stmt *)
+	LD 53
+	GetDisplayPointValueF DisplayAddress, DisplayPoint53
+	ST DisplayPoint53
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=503)); **)
+	(* assign - Stmt *)
+	LD 503
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=53, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 53
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT54: AI5)*} **)
+(** DisplayPoint54 := GetDisplayPointValueF(PointNumber:=54, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint54); **)
+	(* assign - Stmt *)
+	LD 54
+	GetDisplayPointValueF DisplayAddress, DisplayPoint54
+	ST DisplayPoint54
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=504)); **)
+	(* assign - Stmt *)
+	LD 504
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=54, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 54
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT55: AI6)*} **)
+(** DisplayPoint55 := GetDisplayPointValueF(PointNumber:=55, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint55); **)
+	(* assign - Stmt *)
+	LD 55
+	GetDisplayPointValueF DisplayAddress, DisplayPoint55
+	ST DisplayPoint55
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=505)); **)
+	(* assign - Stmt *)
+	LD 505
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=55, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 55
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT56: AI7)*} **)
+(** DisplayPoint56 := GetDisplayPointValueF(PointNumber:=56, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint56); **)
+	(* assign - Stmt *)
+	LD 56
+	GetDisplayPointValueF DisplayAddress, DisplayPoint56
+	ST DisplayPoint56
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=506)); **)
+	(* assign - Stmt *)
+	LD 506
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=56, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 56
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT57: AI8)*} **)
+(** DisplayPoint57 := GetDisplayPointValueF(PointNumber:=57, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint57); **)
+	(* assign - Stmt *)
+	LD 57
+	GetDisplayPointValueF DisplayAddress, DisplayPoint57
+	ST DisplayPoint57
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=507)); **)
+	(* assign - Stmt *)
+	LD 507
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=57, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 57
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT58: AI9)*} **)
+(** DisplayPoint58 := GetDisplayPointValueF(PointNumber:=58, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint58); **)
+	(* assign - Stmt *)
+	LD 58
+	GetDisplayPointValueF DisplayAddress, DisplayPoint58
+	ST DisplayPoint58
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=508)); **)
+	(* assign - Stmt *)
+	LD 508
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=58, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 58
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT59: AI10)*} **)
+(** DisplayPoint59 := GetDisplayPointValueF(PointNumber:=59, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint59); **)
+	(* assign - Stmt *)
+	LD 59
+	GetDisplayPointValueF DisplayAddress, DisplayPoint59
+	ST DisplayPoint59
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=509)); **)
+	(* assign - Stmt *)
+	LD 509
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=59, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 59
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT60: AI11)*} **)
+(** DisplayPoint60 := GetDisplayPointValueF(PointNumber:=60, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint60); **)
+	(* assign - Stmt *)
+	LD 60
+	GetDisplayPointValueF DisplayAddress, DisplayPoint60
+	ST DisplayPoint60
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=510)); **)
+	(* assign - Stmt *)
+	LD 510
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=60, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 60
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT61: AI12)*} **)
+(** DisplayPoint61 := GetDisplayPointValueF(PointNumber:=61, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint61); **)
+	(* assign - Stmt *)
+	LD 61
+	GetDisplayPointValueF DisplayAddress, DisplayPoint61
+	ST DisplayPoint61
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=511)); **)
+	(* assign - Stmt *)
+	LD 511
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=61, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 61
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(**  **)
+(** {* Digital Output -----------------------------------------------------------------------------------------------------------*} **)
+(**  **)
+(** {* POINT62: D01)*} **)
+(** DisplayPoint62 := GetDisplayPointValueF(PointNumber:=62, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint62); **)
+	(* assign - Stmt *)
+	LD 62
+	GetDisplayPointValueF DisplayAddress, DisplayPoint62
+	ST DisplayPoint62
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=12)); **)
+	(* assign - Stmt *)
+	LD 12
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=62, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 62
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT63: D02)*} **)
+(** DisplayPoint63 := GetDisplayPointValueF(PointNumber:=63, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint63); **)
+	(* assign - Stmt *)
+	LD 63
+	GetDisplayPointValueF DisplayAddress, DisplayPoint63
+	ST DisplayPoint63
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=13)); **)
+	(* assign - Stmt *)
+	LD 13
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=63, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 63
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT64: D03)*} **)
+(** DisplayPoint64 := GetDisplayPointValueF(PointNumber:=64, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint64); **)
+	(* assign - Stmt *)
+	LD 64
+	GetDisplayPointValueF DisplayAddress, DisplayPoint64
+	ST DisplayPoint64
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=14)); **)
+	(* assign - Stmt *)
+	LD 14
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=64, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 64
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT65: D04)*} **)
+(** DisplayPoint65 := GetDisplayPointValueF(PointNumber:=65, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint65); **)
+	(* assign - Stmt *)
+	LD 65
+	GetDisplayPointValueF DisplayAddress, DisplayPoint65
+	ST DisplayPoint65
+
+(** Result2 := WORD_TO_REAL(GetRegisterF(RegNumber:=15)); **)
+	(* assign - Stmt *)
+	LD 15
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=65, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 65
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(**  **)
+(** {* Analog Output -----------------------------------------------------------------------------------------------------------*} **)
+(**  **)
+(** {* POINT66: A01)*} **)
+(** DisplayPoint66 := GetDisplayPointValueF(PointNumber:=66, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint66); **)
+	(* assign - Stmt *)
+	LD 66
+	GetDisplayPointValueF DisplayAddress, DisplayPoint66
+	ST DisplayPoint66
+
+(** Result2 := GetAnalogOutputF(Number:=1); **)
+	(* assign - Stmt *)
+	LD 1
+	GetAnalogOutputF 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=66, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 66
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT67: A02)*} **)
+(** DisplayPoint67 := GetDisplayPointValueF(PointNumber:=67, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint67); **)
+	(* assign - Stmt *)
+	LD 67
+	GetDisplayPointValueF DisplayAddress, DisplayPoint67
+	ST DisplayPoint67
+
+(** Result2 := GetAnalogOutputF(Number:=2); **)
+	(* assign - Stmt *)
+	LD 2
+	GetAnalogOutputF 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=67, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 67
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT68: A03)*} **)
+(** DisplayPoint68 := GetDisplayPointValueF(PointNumber:=68, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint68); **)
+	(* assign - Stmt *)
+	LD 68
+	GetDisplayPointValueF DisplayAddress, DisplayPoint68
+	ST DisplayPoint68
+
+(** Result2 := GetAnalogOutputF(Number:=3); **)
+	(* assign - Stmt *)
+	LD 3
+	GetAnalogOutputF 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=68, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 68
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT69: A04)*} **)
+(** DisplayPoint69 := GetDisplayPointValueF(PointNumber:=69, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint69); **)
+	(* assign - Stmt *)
+	LD 69
+	GetDisplayPointValueF DisplayAddress, DisplayPoint69
+	ST DisplayPoint69
+
+(** Result2 := GetAnalogOutputF(Number:=4); **)
+	(* assign - Stmt *)
+	LD 4
+	GetAnalogOutputF 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=69, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 69
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(** {* Triacs -----------------------------------------------------------------------------------------------------------*} **)
+(**  **)
+(** {* POINT70: T01)*} **)
+(** DisplayPoint70 := GetDisplayPointValueF(PointNumber:=70, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint70); **)
+	(* assign - Stmt *)
+	LD 70
+	GetDisplayPointValueF DisplayAddress, DisplayPoint70
+	ST DisplayPoint70
+
+(** Result2 := GetAnalogOutputF(Number:=5); **)
+	(* assign - Stmt *)
+	LD 5
+	GetAnalogOutputF 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=70, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 70
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT71: T02)*} **)
+(** DisplayPoint71 := GetDisplayPointValueF(PointNumber:=71, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint71); **)
+	(* assign - Stmt *)
+	LD 71
+	GetDisplayPointValueF DisplayAddress, DisplayPoint71
+	ST DisplayPoint71
+
+(** Result2 := GetAnalogOutputF(Number:=6); **)
+	(* assign - Stmt *)
+	LD 6
+	GetAnalogOutputF 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=71, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 71
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT72: T03)*} **)
+(** DisplayPoint72 := GetDisplayPointValueF(PointNumber:=72, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint72); **)
+	(* assign - Stmt *)
+	LD 72
+	GetDisplayPointValueF DisplayAddress, DisplayPoint72
+	ST DisplayPoint72
+
+(** Result2 := GetAnalogOutputF(Number:=7); **)
+	(* assign - Stmt *)
+	LD 7
+	GetAnalogOutputF 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=72, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 72
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+(**  **)
+(** {* POINT73: T04)*} **)
+(** DisplayPoint73 := GetDisplayPointValueF(PointNumber:=73, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint73); **)
+	(* assign - Stmt *)
+	LD 73
+	GetDisplayPointValueF DisplayAddress, DisplayPoint73
+	ST DisplayPoint73
+
+(** Result2 := GetAnalogOutputF(Number:=8); **)
+	(* assign - Stmt *)
+	LD 8
+	GetAnalogOutputF 
+	ST Result2
+
+(** Result := SetDisplayPointF(PointNumber:=73, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=Result2); **)
+	(* assign - Stmt *)
+	LD 73
+	SetDisplayPointF 0, 0, DisplayAddress, Result2
+	ST Result
+
+
+END_PROGRAM

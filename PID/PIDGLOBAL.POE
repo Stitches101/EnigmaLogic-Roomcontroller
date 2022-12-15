@@ -1,0 +1,44 @@
+$BEGIN_IT_HEADER
+GLOBALDEFINITIONS = 1 
+$END_IT_HEADER
+PROGRAM PIDGLOBAL
+VAR_GLOBAL
+SI01 : real;
+SI02 : real := 800.0;
+SI03 : real := 950.0;
+SI04 : real := 950.0;
+
+HE01 : BOOL;
+CO01 : BOOL;
+
+
+PI01 : real; (*CO2 PID*)
+PI02 : real; (*Heating PID*)
+PI03 : real; (*Cooling PID*)
+PI04 : real; (*max of above PID*)
+
+(*512 - 523 reserved for input*)
+
+(*
+SI01 == Setpoint room temperature controller addr: 512
+SI02 == Setpoint room c02 controller addr: 513
+
+
+
+*)
+
+
+
+END_VAR
+
+
+
+
+
+
+
+
+
+
+
+END_PROGRAM

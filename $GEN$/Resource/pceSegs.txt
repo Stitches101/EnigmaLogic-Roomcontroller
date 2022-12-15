@@ -1,0 +1,146 @@
+0/9	SegHardwareConfig	--	20
+0/10	Datasegment	0/11	172	DISPLAYGLOBALVARIABLES
+0/11	Codesegment	0/12	7
+0/12	Initialsegment	0/11	180
+0/13	Datasegment	0/14	44	PIDGLOBAL
+0/14	Codesegment	0/15	7
+0/15	Initialsegment	0/14	52
+8/16	Datasegment	8/17	148	DISPLAYINTERFACE
+8/17	Codesegment	8/18	934
+8/18	Initialsegment	8/17	56
+8/19	Datasegment	8/20	16	DISPLAYINTERFACE.SETREGISTERF
+8/20	Codesegment	8/21	7
+8/21	Initialsegment	8/20	24
+8/22	Datasegment	8/23	20	DISPLAYINTERFACE.GETDISPLAYPOINTVALUEF
+8/23	Codesegment	8/24	7
+8/24	Initialsegment	8/23	28
+8/25	Datasegment	8/26	24	DISPLAYINTERFACE.SETDISPLAYPOINTF
+8/26	Codesegment	8/27	7
+8/27	Initialsegment	8/26	32
+8/28	Datasegment	8/29	16	DISPLAYINTERFACE.SAVEREGISTERSF
+8/29	Codesegment	8/30	7
+8/30	Initialsegment	8/29	24
+8/31	Datasegment	8/32	222	DISPLAYINTERFACE.DISPLAYMODBUSMASTER
+8/32	Codesegment	8/33	7
+8/33	Initialsegment	8/32	230
+5/16	Datasegment	5/17	36	PIDSA
+5/17	Codesegment	5/18	7
+5/18	Initialsegment	5/17	24
+2/16	Datasegment	2/17	132	READ_MEASUREMENTS
+2/17	Codesegment	2/18	1071
+2/18	Initialsegment	2/17	120
+2/19	Datasegment	2/20	16	READ_MEASUREMENTS.SETREGISTERF
+2/20	Codesegment	2/21	7
+2/21	Initialsegment	2/20	24
+2/22	Datasegment	2/23	20	READ_MEASUREMENTS.GETDISPLAYPOINTVALUEF
+2/23	Codesegment	2/24	7
+2/24	Initialsegment	2/23	28
+2/25	Datasegment	2/26	16	READ_MEASUREMENTS.GETLONGREGISTERF
+2/26	Codesegment	2/27	7
+2/27	Initialsegment	2/26	24
+2/28	Datasegment	2/29	222	READ_MEASUREMENTS.MODBUS_ORJA_WRITE
+2/29	Codesegment	2/30	7
+2/30	Initialsegment	2/29	230
+2/31	Datasegment	2/29	222	READ_MEASUREMENTS.MODBUS_ORJA_READ
+10/16	Datasegment	10/17	144	PIC02
+10/17	Codesegment	10/18	228
+10/18	Initialsegment	10/17	96
+10/19	Datasegment	10/20	16	PIC02.GETREGISTERF
+10/20	Codesegment	10/21	7
+10/21	Initialsegment	10/20	24
+10/22	Datasegment	10/23	160	PIC02.PID_CONTROL
+10/23	Codesegment	10/24	7
+10/24	Initialsegment	10/23	168
+7/16	Datasegment	7/17	168	PIDDYN
+7/17	Codesegment	7/18	657
+7/18	Initialsegment	7/17	104
+7/19	Datasegment	7/20	20	PIDDYN.SETANALOGOUTPUTF
+7/20	Codesegment	7/21	7
+7/21	Initialsegment	7/20	28
+7/22	Datasegment	7/23	16	PIDDYN.SETDIGITALOUTPUTF
+7/23	Codesegment	7/24	7
+7/24	Initialsegment	7/23	24
+7/25	Datasegment	7/26	20	PIDDYN.GETDISPLAYPOINTVALUEF
+7/26	Codesegment	7/27	7
+7/27	Initialsegment	7/26	28
+7/28	Datasegment	7/29	24	PIDDYN.SETDISPLAYPOINTF
+7/29	Codesegment	7/30	7
+7/30	Initialsegment	7/29	32
+7/31	Datasegment	7/32	160	PIDDYN.PID_CONTROL
+7/32	Codesegment	7/33	7
+7/33	Initialsegment	7/32	168
+4/16	Datasegment	4/17	112	PIDHC
+4/17	Codesegment	4/18	590
+4/18	Initialsegment	4/17	44
+4/19	Datasegment	4/20	20	PIDHC.GETDISPLAYPOINTVALUEF
+4/20	Codesegment	4/21	7
+4/21	Initialsegment	4/20	28
+4/22	Datasegment	4/23	16	PIDHC.GETREGISTERF
+4/23	Codesegment	4/24	7
+4/24	Initialsegment	4/23	24
+4/25	Datasegment	4/26	24	PIDHC.SETDISPLAYPOINTF
+4/26	Codesegment	4/27	7
+4/27	Initialsegment	4/26	32
+4/28	Datasegment	4/29	16	PIDHC.SETREGISTERF
+4/29	Codesegment	4/30	7
+4/30	Initialsegment	4/29	24
+4/31	Datasegment	4/32	160	PIDHC.PID_CONTROL
+4/32	Codesegment	4/33	7
+4/33	Initialsegment	4/32	168
+1/16	Datasegment	1/17	108	READ_IO_WRITE_MODBUS_REGISTERS
+1/17	Codesegment	1/18	7909
+1/18	Initialsegment	1/17	92
+1/19	Datasegment	1/20	16	READ_IO_WRITE_MODBUS_REGISTERS.SETREGISTERF
+1/20	Codesegment	1/21	7
+1/21	Initialsegment	1/20	24
+1/22	Datasegment	1/23	16	READ_IO_WRITE_MODBUS_REGISTERS.GETREGISTERF
+1/23	Codesegment	1/24	7
+1/24	Initialsegment	1/23	24
+1/25	Datasegment	1/26	16	READ_IO_WRITE_MODBUS_REGISTERS.SETINPUTTYPEF
+1/26	Codesegment	1/27	7
+1/27	Initialsegment	1/26	24
+1/28	Datasegment	1/29	16	READ_IO_WRITE_MODBUS_REGISTERS.GETANALOGINPUTF
+1/29	Codesegment	1/30	7
+1/30	Initialsegment	1/29	24
+1/31	Datasegment	1/32	16	READ_IO_WRITE_MODBUS_REGISTERS.GETNI1000LGMEASUREMENTF
+1/32	Codesegment	1/33	7
+1/33	Initialsegment	1/32	24
+1/34	Datasegment	1/35	16	READ_IO_WRITE_MODBUS_REGISTERS.GETOHMMEASUREMENTF
+1/35	Codesegment	1/36	7
+1/36	Initialsegment	1/35	24
+9/16	Datasegment	9/17	44	PIDSET
+9/17	Codesegment	9/18	355
+9/18	Initialsegment	9/17	20
+9/19	Datasegment	9/20	16	PIDSET.GETREGISTERF
+9/20	Codesegment	9/21	7
+9/21	Initialsegment	9/20	24
+9/22	Datasegment	9/23	16	PIDSET.SETREGISTERF
+9/23	Codesegment	9/24	7
+9/24	Initialsegment	9/23	24
+6/16	Datasegment	6/17	132	DISPLAYIO
+6/17	Codesegment	6/18	2695
+6/18	Initialsegment	6/17	24
+6/19	Datasegment	6/20	20	DISPLAYIO.GETDISPLAYPOINTVALUEF
+6/20	Codesegment	6/21	7
+6/21	Initialsegment	6/20	28
+6/22	Datasegment	6/23	16	DISPLAYIO.GETREGISTERF
+6/23	Codesegment	6/24	7
+6/24	Initialsegment	6/23	24
+6/25	Datasegment	6/26	24	DISPLAYIO.SETDISPLAYPOINTF
+6/26	Codesegment	6/27	7
+6/27	Initialsegment	6/26	32
+6/28	Datasegment	6/29	16	DISPLAYIO.GETANALOGOUTPUTF
+6/29	Codesegment	6/30	7
+6/30	Initialsegment	6/29	24
+3/16	Datasegment	3/17	52	PIDEA
+3/17	Codesegment	3/18	167
+3/18	Initialsegment	3/17	24
+3/19	Datasegment	3/20	16	PIDEA.GETREGISTERF
+3/20	Codesegment	3/21	7
+3/21	Initialsegment	3/20	24
+3/22	Datasegment	3/23	20	PIDEA.SETANALOGOUTPUTF
+3/23	Codesegment	3/24	7
+3/24	Initialsegment	3/23	28
+3/25	Datasegment	3/26	160	PIDEA.PID_CONTROL
+3/26	Codesegment	3/27	7
+3/27	Initialsegment	3/26	168

@@ -1,0 +1,370 @@
+PROGRAM read_measurements
+VAR
+Modbus_Orja_Write : ModbusRegistersFB;
+Modbus_Orja_Read : ModbusRegistersFB;
+wTemp : WORD ;
+temperature_word : WORD ;
+Result : INT ;
+dword_temp : dword ;
+dword_temp2 : dword ;
+dword_temp3 : dword ;
+rTemp : REAL ;
+DisplayPoint2 : REAL ;
+Mater_relay : INT ;
+Slave_relay_int : INT ;
+Slave_relay_word : WORD ;
+DisplayPoint1 : REAL ;
+DisplayPoint3 : REAL ;
+DisplayTemperature : REAL ;
+FX2030_button_status : DWORD ;
+FX_2030_button_pushed : BOOL ;
+min01,min02,min03,min04,min05,min06,min07,min08,min09,min10,min11,min12: REAL;
+END_VAR
+(** {* set the number of register to be read and written *} **)
+(** Result := SetRegisterF ( Number := 1000, Value := 9884 ); **)
+	(* assign - Stmt *)
+	LD 1000
+	SetRegisterF 9884
+	ST Result
+
+(**  **)
+(** min01 := GetDisplayPointValueF(PointNumber:=1, SlaveAddress:=10, OldValue:=min01); **)
+	(* assign - Stmt *)
+	LD 1
+	GetDisplayPointValueF 10, min01
+	ST min01
+
+(** Result := SetRegisterF( Number := 1001, Value := REAL_TO_WORD(min01)); **)
+	(* assign - Stmt *)
+	LD 1001
+	SetRegisterF ( min01
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(** min02 := GetDisplayPointValueF(PointNumber:=2, SlaveAddress:=10, OldValue:=min02); **)
+	(* assign - Stmt *)
+	LD 2
+	GetDisplayPointValueF 10, min02
+	ST min02
+
+(** Result := SetRegisterF( Number := 1002, Value := REAL_TO_WORD(min02)); **)
+	(* assign - Stmt *)
+	LD 1002
+	SetRegisterF ( min02
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(** min03 := GetDisplayPointValueF(PointNumber:=3, SlaveAddress:=10, OldValue:=min03); **)
+	(* assign - Stmt *)
+	LD 3
+	GetDisplayPointValueF 10, min03
+	ST min03
+
+(** Result := SetRegisterF( Number := 1003, Value := REAL_TO_WORD(min03)); **)
+	(* assign - Stmt *)
+	LD 1003
+	SetRegisterF ( min03
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(** min04 := GetDisplayPointValueF(PointNumber:=4, SlaveAddress:=10, OldValue:=min04); **)
+	(* assign - Stmt *)
+	LD 4
+	GetDisplayPointValueF 10, min04
+	ST min04
+
+(** Result := SetRegisterF( Number := 1004, Value := REAL_TO_WORD(min04)); **)
+	(* assign - Stmt *)
+	LD 1004
+	SetRegisterF ( min04
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(** min05 := GetDisplayPointValueF(PointNumber:=5, SlaveAddress:=10, OldValue:=min05); **)
+	(* assign - Stmt *)
+	LD 5
+	GetDisplayPointValueF 10, min05
+	ST min05
+
+(** Result := SetRegisterF( Number := 1005, Value := REAL_TO_WORD(min05)); **)
+	(* assign - Stmt *)
+	LD 1005
+	SetRegisterF ( min05
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(** min06 := GetDisplayPointValueF(PointNumber:=6, SlaveAddress:=10, OldValue:=min06); **)
+	(* assign - Stmt *)
+	LD 6
+	GetDisplayPointValueF 10, min06
+	ST min06
+
+(** Result := SetRegisterF( Number := 1006, Value := REAL_TO_WORD(min06)); **)
+	(* assign - Stmt *)
+	LD 1006
+	SetRegisterF ( min06
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(** min07 := GetDisplayPointValueF(PointNumber:=7, SlaveAddress:=10, OldValue:=min07); **)
+	(* assign - Stmt *)
+	LD 7
+	GetDisplayPointValueF 10, min07
+	ST min07
+
+(** Result := SetRegisterF( Number := 1007, Value := REAL_TO_WORD(min07)); **)
+	(* assign - Stmt *)
+	LD 1007
+	SetRegisterF ( min07
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(** min08 := GetDisplayPointValueF(PointNumber:=8, SlaveAddress:=10, OldValue:=min08); **)
+	(* assign - Stmt *)
+	LD 8
+	GetDisplayPointValueF 10, min08
+	ST min08
+
+(** Result := SetRegisterF( Number := 1008, Value := REAL_TO_WORD(min08)); **)
+	(* assign - Stmt *)
+	LD 1008
+	SetRegisterF ( min08
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(** min09 := GetDisplayPointValueF(PointNumber:=9, SlaveAddress:=10, OldValue:=min09); **)
+	(* assign - Stmt *)
+	LD 9
+	GetDisplayPointValueF 10, min09
+	ST min09
+
+(** Result := SetRegisterF( Number := 1009, Value := REAL_TO_WORD(min09)); **)
+	(* assign - Stmt *)
+	LD 1009
+	SetRegisterF ( min09
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(** min10 := GetDisplayPointValueF(PointNumber:=10, SlaveAddress:=10, OldValue:=min10); **)
+	(* assign - Stmt *)
+	LD 10
+	GetDisplayPointValueF 10, min10
+	ST min10
+
+(** Result := SetRegisterF( Number := 1010, Value := REAL_TO_WORD(min10)); **)
+	(* assign - Stmt *)
+	LD 1010
+	SetRegisterF ( min10
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(** min11 := GetDisplayPointValueF(PointNumber:=11, SlaveAddress:=10, OldValue:=min11); **)
+	(* assign - Stmt *)
+	LD 11
+	GetDisplayPointValueF 10, min11
+	ST min11
+
+(** Result := SetRegisterF( Number := 1011, Value := REAL_TO_WORD(min11)); **)
+	(* assign - Stmt *)
+	LD 1011
+	SetRegisterF ( min11
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(** min12 := GetDisplayPointValueF(PointNumber:=12, SlaveAddress:=10, OldValue:=min12); **)
+	(* assign - Stmt *)
+	LD 12
+	GetDisplayPointValueF 10, min12
+	ST min12
+
+(** Result := SetRegisterF( Number := 1012, Value := REAL_TO_WORD(min12)); **)
+	(* assign - Stmt *)
+	LD 1012
+	SetRegisterF ( min12
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(**  **)
+(** {* read the register that contains teh button status from the FX-2030 *} **)
+(** FX2030_button_status := GetLongRegisterF (0) ; **)
+	(* assign - Stmt *)
+	LD 0
+	GetLongRegisterF 
+	ST FX2030_button_status
+
+(** FX_2030_button_pushed := INT_TO_BOOL(WORD_TO_INT(DWORD_TO_WORD(FX2030_button_status))) ; **)
+	(* assign - Stmt *)
+	LD FX2030_button_status
+	DWORD_TO_WORD 
+	WORD_TO_INT 
+	INT_TO_BOOL 
+	ST FX_2030_button_pushed
+
+(**  **)
+(** {* read temperature from multi-24 slave module and write it to the display *} **)
+(** Modbus_Orja_Read.Send := 0; **)
+	(* assign - Stmt *)
+	LD 0
+	ST Modbus_Orja_Read.Send
+
+(** Modbus_Orja_Read.SlaveAddress := 24; **)
+	(* assign - Stmt *)
+	LD 24
+	ST Modbus_Orja_Read.SlaveAddress
+
+(** Modbus_Orja_Read.StartRegister := 523; **)
+	(* assign - Stmt *)
+	LD 523
+	ST Modbus_Orja_Read.StartRegister
+
+(** Modbus_Orja_Read.RegisterCount := 1; **)
+	(* assign - Stmt *)
+	LD 1
+	ST Modbus_Orja_Read.RegisterCount
+
+(** Modbus_Orja_Read.RegisterType := 3; **)
+	(* assign - Stmt *)
+	LD 3
+	ST Modbus_Orja_Read.RegisterType
+
+(** Modbus_Orja_Read.TimeOut := 800; **)
+	(* assign - Stmt *)
+	LD 800
+	ST Modbus_Orja_Read.TimeOut
+
+(** Modbus_Orja_Read.PollInterval := 800; **)
+	(* assign - Stmt *)
+	LD 800
+	ST Modbus_Orja_Read.PollInterval
+
+(** Modbus_Orja_Read(); **)
+	(* call - Stmt *)
+	CAL Modbus_Orja_Read
+
+(** temperature_word := Modbus_Orja_Read.Reg0;  **)
+	(* assign - Stmt *)
+	LD Modbus_Orja_Read.Reg0
+	ST temperature_word
+
+(** Result := word_to_int (temperature_word) ; **)
+	(* assign - Stmt *)
+	LD temperature_word
+	WORD_TO_INT 
+	ST Result
+
+(** Result := Result / 100 ; **)
+	(* assign - Stmt *)
+	LD Result
+	DIV 100
+	ST Result
+
+(** rTemp := INT_to_real (Result) ; **)
+	(* assign - Stmt *)
+	LD Result
+	INT_to_real 
+	ST rTemp
+
+(**  **)
+(** {* read button status from display and change the master multi-24 relay *} **)
+(** {* **)
+(** DisplayPoint2 := GetDisplayPointValueF(PointNumber:=2, SlaveAddress:=10, OldValue:=DisplayPoint2); **)
+(** Mater_relay := REAL_TO_INT (DisplayPoint2) ; **)
+(** *} **)
+(**  **)
+(** {* if the button on the FX-2030 is pushed, always send "0" to close the relay, **)
+(** otherwise, send the status based on the button on the small display *} **)
+(** {* **)
+(** IF FX_2030_button_pushed THEN **)
+(** 	Result := SetDigitalOutputF (1, 0) ; **)
+(** ELSE **)
+(** 	Result := SetDigitalOutputF (1, Mater_relay) ; **)
+(** END_IF ; **)
+(** *} **)
+(** {* read button status from display and write to the slave multi-24 relay through the correct registers *} **)
+(** {* **)
+(** DisplayPoint3 := GetDisplayPointValueF(PointNumber:=3, SlaveAddress:=10, OldValue:=DisplayPoint3); **)
+(** Slave_relay_int := REAL_TO_INT (DisplayPoint3) ; **)
+(** Slave_relay_word := INT_TO_WORD (Slave_relay_int) ; **)
+(** *} **)
+(**  **)
+(** {* if the button on the FX-2030 is pushed, close the relay, **)
+(** otherwise, send the status based on the button on the small display *} **)
+(** IF FX_2030_button_pushed THEN **)
+	(* if - Cond *)
+	LD FX_2030_button_pushed
+	JMPCN ODK_SKIP_000000000000001_000000000000001
+
+		(* then - Stmts *)
+
+(** 	Slave_relay_word := 0 ; **)
+		(* assign - Stmt *)
+		LD 0
+		ST Slave_relay_word
+
+		JMP ODK_END_IF_000000000000001
+
+(** END_IF ; **)
+	(* if - End *) 
+	ODK_SKIP_000000000000001_000000000000001:
+	ODK_END_IF_000000000000001:
+
+(**  **)
+(** {* write the register to the multi-24 slave *} **)
+(** Modbus_Orja_Write.Send := 1; **)
+	(* assign - Stmt *)
+	LD 1
+	ST Modbus_Orja_Write.Send
+
+(** Modbus_Orja_Write.SlaveAddress := 24; **)
+	(* assign - Stmt *)
+	LD 24
+	ST Modbus_Orja_Write.SlaveAddress
+
+(** Modbus_Orja_Write.StartRegister := 12; **)
+	(* assign - Stmt *)
+	LD 12
+	ST Modbus_Orja_Write.StartRegister
+
+(** Modbus_Orja_Write.RegisterCount := 1; **)
+	(* assign - Stmt *)
+	LD 1
+	ST Modbus_Orja_Write.RegisterCount
+
+(** Modbus_Orja_Write.RegisterType := 3; **)
+	(* assign - Stmt *)
+	LD 3
+	ST Modbus_Orja_Write.RegisterType
+
+(** Modbus_Orja_Write.TimeOut := 300; **)
+	(* assign - Stmt *)
+	LD 300
+	ST Modbus_Orja_Write.TimeOut
+
+(** Modbus_Orja_Write.PollInterval := 500; **)
+	(* assign - Stmt *)
+	LD 500
+	ST Modbus_Orja_Write.PollInterval
+
+(** Modbus_Orja_Write.Reg0 :=  Slave_relay_word ; **)
+	(* assign - Stmt *)
+	LD Slave_relay_word
+	ST Modbus_Orja_Write.Reg0
+
+(** Modbus_Orja_Write(); **)
+	(* call - Stmt *)
+	CAL Modbus_Orja_Write
+
+
+END_PROGRAM

@@ -1,0 +1,184 @@
+PROGRAM PIC02
+VAR_EXTERNAL
+DisplayAddress : usint;
+DisplayPoint74 : real;
+
+SI01 : real;
+SI02 : real;
+SI03 : real;
+SI04 : real;
+
+PI01 : real;
+PI02 : real;
+PI03 : real;
+PI04 : real;
+
+HE01 : BOOL;
+CO01 : BOOL;
+
+END_VAR
+
+VAR
+PID_CONTROL : PIDFB ; (* The functionblock type: PIDFB *)
+in01 : real;
+var01 : real := 0.0;
+var02 : real := 0.0;
+var03 : real := 10.0;
+var04 : real := 2000.0;
+cal01 : real;
+cal02 : real;
+cal03 : real;
+cal04 : real;
+cal05 : real;
+Result : word;
+Result2 : int;
+y01 : real := 0.0;
+y02 : real := 100.0;
+x01 : real := 0.0;
+x02 : real;
+in02 : real;
+min01 : real := 0.0;
+max01 : real  := 2000.0;
+min02 : real := 0.0;
+max02 : real  := 50.0;
+
+
+
+END_VAR
+(** {*Setpoint calculator C02*} **)
+(** in01 := WORD_TO_REAL (GetRegisterF(RegNumber:=508)); {*AI09 == CO2 0-10V)*} **)
+	(* assign - Stmt *)
+	LD 508
+	GetRegisterF 
+	WORD_TO_REAL 
+	ST in01
+
+(**  cal01 := var03 - var01; **)
+	(* assign - Stmt *)
+	LD var03
+	SUB var01
+	ST cal01
+
+(**  cal02 := var02 - var04; **)
+	(* assign - Stmt *)
+	LD var02
+	SUB var04
+	ST cal02
+
+(**  cal03 := cal02 / cal01; **)
+	(* assign - Stmt *)
+	LD cal02
+	DIV cal01
+	ST cal03
+
+(**  cal04 := in01 - var01; **)
+	(* assign - Stmt *)
+	LD in01
+	SUB var01
+	ST cal04
+
+(**  cal05 := var02 - (cal04 * cal03); **)
+	(* assign - Stmt *)
+	LD var02
+	SUB ( cal04
+		MUL cal03
+	)
+	ST cal05
+
+(**  **)
+(** IF var02 = var04 THEN **)
+	(* if - Cond *)
+	LD var02
+	EQ var04
+	JMPCN ODK_SKIP_000000000000001_000000000000001
+
+		(* then - Stmts *)
+
+(**    cal05 := in01; **)
+		(* assign - Stmt *)
+		LD in01
+		ST cal05
+
+		JMP ODK_END_IF_000000000000001
+
+(** END_IF; **)
+	(* if - End *) 
+	ODK_SKIP_000000000000001_000000000000001:
+	ODK_END_IF_000000000000001:
+
+(**  **)
+(**  cal05 := LIMIT(min01,cal05,max01); **)
+	(* assign - Stmt *)
+	LD min01
+	LIMIT cal05, max01
+	ST cal05
+
+(**  **)
+(** PID_CONTROL.measurement := cal05; **)
+	(* assign - Stmt *)
+	LD cal05
+	ST PID_CONTROL.measurement
+
+(** PID_CONTROL.setpoint := SI02; {*SI02 == Setpoint room co2 controller)*} **)
+	(* assign - Stmt *)
+	LD SI02
+	ST PID_CONTROL.setpoint
+
+(** PID_CONTROL.stages := 1; {* INT, between 1 and 6 *} **)
+	(* assign - Stmt *)
+	LD 1
+	ST PID_CONTROL.stages
+
+(** PID_CONTROL.balance := 0; {* INT, between 0 and 6 *} **)
+	(* assign - Stmt *)
+	LD 0
+	ST PID_CONTROL.balance
+
+(** PID_CONTROL.deadzone := 50.0 ; {* REAL *} **)
+	(* assign - Stmt *)
+	LD 50.0
+	ST PID_CONTROL.deadzone
+
+(** PID_CONTROL.comfort := 0.1; {* REAL *} **)
+	(* assign - Stmt *)
+	LD 0.1
+	ST PID_CONTROL.comfort
+
+(** PID_CONTROL.min1 := 0; {* INT, between 0 and 100 *} **)
+	(* assign - Stmt *)
+	LD 0
+	ST PID_CONTROL.min1
+
+(** PID_CONTROL.max1 := 100; {* INT, between 0 and 100 *} **)
+	(* assign - Stmt *)
+	LD 100
+	ST PID_CONTROL.max1
+
+(** PID_CONTROL.pband1 := 100.0; {* REAL, bigger than 0 *} **)
+	(* assign - Stmt *)
+	LD 100.0
+	ST PID_CONTROL.pband1
+
+(** PID_CONTROL.iTime := 120; {* INT, seconds, bigger than 0 *} **)
+	(* assign - Stmt *)
+	LD 120
+	ST PID_CONTROL.iTime
+
+(** PID_CONTROL.dTime := 0; {* INT, seconds *} **)
+	(* assign - Stmt *)
+	LD 0
+	ST PID_CONTROL.dTime
+
+(** {* calling the execution of the functionblock *} **)
+(** PID_CONTROL(); **)
+	(* call - Stmt *)
+	CAL PID_CONTROL
+
+(**  **)
+(** PI01 := PID_CONTROL.out1; **)
+	(* assign - Stmt *)
+	LD PID_CONTROL.out1
+	ST PI01
+
+
+END_PROGRAM

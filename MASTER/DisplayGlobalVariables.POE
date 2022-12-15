@@ -1,0 +1,60 @@
+$BEGIN_IT_HEADER
+GLOBALDEFINITIONS = 1
+$END_IT_HEADER
+PROGRAM DisplayGlobalVariables
+VAR_GLOBAL
+DisplayAddress : usint := 10;
+DisplayAddress2 : usint := 10;
+DisplayTimeSchedule1 : int := 0;
+DisplayTimeSchedule2 : int := 0;
+DisplayTimeSchedule3 : int := 0;
+DisplayTimeSchedule4 : int := 0;
+DisplayTimeSchedule5 : int := 0;
+DisplayTemperature : real := -99.9;
+DisplayTemperature2 : real := -99.9;
+DisplayTamper : int := 0;
+DisplayPoint1 : real;
+DisplayPoint2 : real;
+DisplayPoint3 : real;
+DisplayPoint4 : real;
+DisplayPoint5 : real;
+DisplayPoint6 : real;
+DisplayPoint7 : real;
+DisplayPoint8 : real;
+DisplayPoint9 : real;
+DisplayPoint10 : real;
+
+DisplayPoint50 : real;
+DisplayPoint51 : real;
+DisplayPoint52 : real;
+DisplayPoint53 : real;
+DisplayPoint54 : real;
+DisplayPoint55 : real;
+DisplayPoint56 : real;
+DisplayPoint57 : real;
+DisplayPoint58 : real;
+DisplayPoint59 : real;
+DisplayPoint60 : real;
+DisplayPoint61 : real;
+DisplayPoint62 : real;
+DisplayPoint63 : real;
+DisplayPoint64 : real;
+DisplayPoint65 : real;
+DisplayPoint66 : real;
+DisplayPoint67 : real;
+DisplayPoint68 : real;
+DisplayPoint69 : real;
+DisplayPoint70 : real;
+DisplayPoint71 : real;
+DisplayPoint72 : real;
+DisplayPoint73 : real;
+DisplayPoint74 : real;
+END_VAR
+
+
+
+
+
+
+
+END_PROGRAM

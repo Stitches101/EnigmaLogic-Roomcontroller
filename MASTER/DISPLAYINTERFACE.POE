@@ -1,0 +1,308 @@
+PROGRAM DisplayInterface
+VAR_EXTERNAL
+DisplayAddress : usint;
+DisplayAddress2 : usint;
+DisplayTimeSchedule1 : int;
+DisplayTimeSchedule2 : int;
+DisplayTimeSchedule3 : int;
+DisplayTimeSchedule4 : int;
+DisplayTimeSchedule5 : int;
+DisplayTemperature : real;
+DisplayTemperature2 : real;
+DisplayTamper : int;
+DisplayPoint1 : real;
+DisplayPoint2 : real;
+DisplayPoint3 : real;
+DisplayPoint4 : real;
+DisplayPoint5 : real;
+DisplayPoint6 : real;
+DisplayPoint7 : real;
+DisplayPoint8 : real;
+DisplayPoint9 : real;
+DisplayPoint10 : real;
+END_VAR
+VAR_GLOBAL
+END_VAR
+VAR
+Result : int;
+Result2 : real;
+Resulttest : dint;
+Resulttest2 : dint;
+DisplayModbusMaster : ModbusRegistersFB;
+SaveRegistersTimer : int := 5001;
+NewValue : real;
+FirstRun : int := 1;
+dwTemp : dword;
+diTemp : dint;
+
+DisplayPoint2222 : real;
+
+END_VAR
+(**  **)
+(** {* Read some measurements from the display *} **)
+(** DisplayModbusMaster(send:=0, SlaveAddress:=DisplayAddress, StartRegister:=3000, RegisterCount:=63, RegisterType:=3, TimeOut:=200, PollInterval:=2000); **)
+	(* call - Stmt *)
+	CAL DisplayModbusMaster (
+		send := 0,
+		SlaveAddress := DisplayAddress,
+		StartRegister := 3000,
+		RegisterCount := 63,
+		RegisterType := 3,
+		TimeOut := 200,
+		PollInterval := 2000
+	)
+
+(** DisplayTemperature := INT_TO_REAL(WORD_TO_INT(DisplayModbusMaster.Reg0)); **)
+	(* assign - Stmt *)
+	LD DisplayModbusMaster.Reg0
+	WORD_TO_INT 
+	INT_TO_REAL 
+	ST DisplayTemperature
+
+(** Result := SetRegisterF( Number := 1013, Value := REAL_TO_WORD(DisplayTemperature)); **)
+	(* assign - Stmt *)
+	LD 1013
+	SetRegisterF ( DisplayTemperature
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(**  **)
+(** DisplayTamper := BOOL_TO_INT(DisplayModbusMaster.Reg6 = 1023); **)
+	(* assign - Stmt *)
+	LD DisplayModbusMaster.Reg6
+	EQ 1023
+	BOOL_TO_INT 
+	ST DisplayTamper
+
+(** DisplayTimeSchedule1 := WORD_TO_INT(DisplayModbusMaster.Reg7); **)
+	(* assign - Stmt *)
+	LD DisplayModbusMaster.Reg7
+	WORD_TO_INT 
+	ST DisplayTimeSchedule1
+
+(** DisplayTimeSchedule2 := WORD_TO_INT(DisplayModbusMaster.Reg8); **)
+	(* assign - Stmt *)
+	LD DisplayModbusMaster.Reg8
+	WORD_TO_INT 
+	ST DisplayTimeSchedule2
+
+(** DisplayTimeSchedule3 := WORD_TO_INT(DisplayModbusMaster.Reg9); **)
+	(* assign - Stmt *)
+	LD DisplayModbusMaster.Reg9
+	WORD_TO_INT 
+	ST DisplayTimeSchedule3
+
+(** DisplayTimeSchedule4 := WORD_TO_INT(DisplayModbusMaster.Reg10); **)
+	(* assign - Stmt *)
+	LD DisplayModbusMaster.Reg10
+	WORD_TO_INT 
+	ST DisplayTimeSchedule4
+
+(** DisplayTimeSchedule5 := WORD_TO_INT(DisplayModbusMaster.Reg11); **)
+	(* assign - Stmt *)
+	LD DisplayModbusMaster.Reg11
+	WORD_TO_INT 
+	ST DisplayTimeSchedule5
+
+(**  **)
+(**  **)
+(** {* Display point overview---------------------------------------------------------------------------------------------------------- *} **)
+(**  **)
+(**  **)
+(** {* POINT1: SET RT -> PIDHC *} **)
+(**  **)
+(**  **)
+(** {* POINT2: ADJUST *} **)
+(** DisplayPoint2 := GetDisplayPointValueF(PointNumber:=2, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint2); **)
+	(* assign - Stmt *)
+	LD 2
+	GetDisplayPointValueF DisplayAddress, DisplayPoint2
+	ST DisplayPoint2
+
+(** Result := SetDisplayPointF(PointNumber:=2, PointType:=1, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=DisplayPoint2); **)
+	(* assign - Stmt *)
+	LD 2
+	SetDisplayPointF 1, 0, DisplayAddress, DisplayPoint2
+	ST Result
+
+(**  **)
+(** {* POINT3:  DO1*} **)
+(** DisplayPoint3 := GetDisplayPointValueF(PointNumber:=3, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint3); **)
+	(* assign - Stmt *)
+	LD 3
+	GetDisplayPointValueF DisplayAddress, DisplayPoint3
+	ST DisplayPoint3
+
+(** Result := SetDisplayPointF(PointNumber:=3, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=DisplayPoint3 ); **)
+	(* assign - Stmt *)
+	LD 3
+	SetDisplayPointF 0, 0, DisplayAddress, DisplayPoint3
+	ST Result
+
+(** Result := SetRegisterF( Number := 12, Value := REAL_TO_WORD(DisplayPoint3)); **)
+	(* assign - Stmt *)
+	LD 12
+	SetRegisterF ( DisplayPoint3
+			REAL_TO_WORD 
+		)
+	ST Result
+
+(**  **)
+(** {* POINT4:  *} **)
+(** DisplayPoint4 := GetDisplayPointValueF(PointNumber:=4, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint4); **)
+	(* assign - Stmt *)
+	LD 4
+	GetDisplayPointValueF DisplayAddress, DisplayPoint4
+	ST DisplayPoint4
+
+(** Result := SetDisplayPointF(PointNumber:=4, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=DisplayPoint4 ); **)
+	(* assign - Stmt *)
+	LD 4
+	SetDisplayPointF 0, 0, DisplayAddress, DisplayPoint4
+	ST Result
+
+(**  **)
+(** {* POINT5:  *} **)
+(** DisplayPoint5 := GetDisplayPointValueF(PointNumber:=5, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint5); **)
+	(* assign - Stmt *)
+	LD 5
+	GetDisplayPointValueF DisplayAddress, DisplayPoint5
+	ST DisplayPoint5
+
+(** Result := SetDisplayPointF(PointNumber:=5, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=DisplayPoint5 ); **)
+	(* assign - Stmt *)
+	LD 5
+	SetDisplayPointF 0, 0, DisplayAddress, DisplayPoint5
+	ST Result
+
+(**  **)
+(** {* POINT6:  *} **)
+(** DisplayPoint6 := GetDisplayPointValueF(PointNumber:=6, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint6); **)
+	(* assign - Stmt *)
+	LD 6
+	GetDisplayPointValueF DisplayAddress, DisplayPoint6
+	ST DisplayPoint6
+
+(** Result := SetDisplayPointF(PointNumber:=6, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=DisplayPoint6 ); **)
+	(* assign - Stmt *)
+	LD 6
+	SetDisplayPointF 0, 0, DisplayAddress, DisplayPoint6
+	ST Result
+
+(**  **)
+(** {* POINT7:  *} **)
+(** DisplayPoint7 := GetDisplayPointValueF(PointNumber:=7, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint7); **)
+	(* assign - Stmt *)
+	LD 7
+	GetDisplayPointValueF DisplayAddress, DisplayPoint7
+	ST DisplayPoint7
+
+(** Result := SetDisplayPointF(PointNumber:=7, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=DisplayPoint7 ); **)
+	(* assign - Stmt *)
+	LD 7
+	SetDisplayPointF 0, 0, DisplayAddress, DisplayPoint7
+	ST Result
+
+(**  **)
+(** {* POINT8: HEATING/COOLING -> PIDHC *} **)
+(**  **)
+(** {* POINT9:  *} **)
+(** DisplayPoint9 := GetDisplayPointValueF(PointNumber:=9, SlaveAddress:=DisplayAddress, OldValue:=DisplayPoint9); **)
+	(* assign - Stmt *)
+	LD 9
+	GetDisplayPointValueF DisplayAddress, DisplayPoint9
+	ST DisplayPoint9
+
+(** Result := SetDisplayPointF(PointNumber:=9, PointType:=0, PointUnit:=0, SlaveAddress:=DisplayAddress, PointValue:=DisplayPoint9 ); **)
+	(* assign - Stmt *)
+	LD 9
+	SetDisplayPointF 0, 0, DisplayAddress, DisplayPoint9
+	ST Result
+
+(**  **)
+(** {* POINT10: RT -> PIDHC *} **)
+(**  **)
+(**  **)
+(**  **)
+(** if (DisplayTamper = 1) then **)
+	(* if - Cond *)
+	LD DisplayTamper
+	EQ 1
+	JMPCN ODK_SKIP_000000000000001_000000000000001
+
+		(* then - Stmts *)
+
+(**     DisplayModbusMaster.Reg62 := 0; **)
+		(* assign - Stmt *)
+		LD 0
+		ST DisplayModbusMaster.Reg62
+
+(**     DisplayModbusMaster(send:=1); **)
+		(* call - Stmt *)
+		CAL DisplayModbusMaster (
+			send := 1
+		)
+
+		JMP ODK_END_IF_000000000000001
+
+(** end_if; **)
+	(* if - End *) 
+	ODK_SKIP_000000000000001_000000000000001:
+	ODK_END_IF_000000000000001:
+
+(**  **)
+(** {* Save registers if any of the setpoints is changed *} **)
+(** {* 50 loop delay is to let user do all the settings before saving *} **)
+(** if (SaveRegistersTimer < 50) then **)
+	(* if - Cond *)
+	LD SaveRegistersTimer
+	LT 50
+	JMPCN ODK_SKIP_000000000000002_000000000000001
+
+		(* then - Stmts *)
+
+(**     SaveRegistersTimer := SaveRegistersTimer + 1; **)
+		(* assign - Stmt *)
+		LD SaveRegistersTimer
+		ADD 1
+		ST SaveRegistersTimer
+
+		JMP ODK_END_IF_000000000000002
+
+(** elsif (SaveRegistersTimer = 50) then **)
+	(* elseif - Cond *) 
+	ODK_SKIP_000000000000002_000000000000001:
+	LD SaveRegistersTimer
+	EQ 50
+	JMPCN ODK_SKIP_000000000000002_000000000000002
+
+		(* elsif - Stmts *)
+
+(**     SaveRegistersTimer := SaveRegistersTimer + 1; **)
+		(* assign - Stmt *)
+		LD SaveRegistersTimer
+		ADD 1
+		ST SaveRegistersTimer
+
+(**     Result := SaveRegistersF(1); **)
+		(* assign - Stmt *)
+		LD 1
+		SaveRegistersF 
+		ST Result
+
+		JMP ODK_END_IF_000000000000002
+
+(** end_if; **)
+	(* if - End *) 
+	ODK_SKIP_000000000000002_000000000000002:
+	ODK_END_IF_000000000000002:
+
+(**  **)
+(** FirstRun:=0; **)
+	(* assign - Stmt *)
+	LD 0
+	ST FirstRun
+
+
+END_PROGRAM
