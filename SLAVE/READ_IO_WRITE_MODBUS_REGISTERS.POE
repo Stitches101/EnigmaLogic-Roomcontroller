@@ -1,0 +1,3372 @@
+PROGRAM read_IO_write_Modbus_registers
+VAR
+init, result, iTemp, iTemp2 : int;
+in01,in02,in03,in04,in05,in06,in07,in08,in09,in10,in11,in12: uint;
+inreg01,inreg02,inreg03,inreg04,inreg05,inreg06,inreg07,inreg08,inreg09,inreg10,inreg11,inreg12: int;
+wTemp : word;
+diTemp : DINT;
+uiTemp : uint;
+rTemp : real;
+NTC10_meas : INT ;
+END_VAR
+(**  **)
+(** {*JHM Jonker - 08-12-2022*} **)
+(**  **)
+(**  **)
+(** {*0 - 12 settings per analog input*} **)
+(** {*500 - 511 get value from analog input and put in register*} **)
+(** {*512 - 523 reserved for input*} **)
+(** {*524 - Sweep*} **)
+(**  **)
+(** Result := SetRegisterF ( Number := 1001, Value := 36 ) ; **)
+	(* assign - Stmt *)
+	LD 1001
+	SetRegisterF 36
+	ST Result
+
+(**  **)
+(** {*IO Settings*} **)
+(**  **)
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=0)); **)
+	(* assign - Stmt *)
+	LD 0
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 1, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 1
+	SetInputTypeF iTemp
+	ST Result
+
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=1)); **)
+	(* assign - Stmt *)
+	LD 1
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 2, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 2
+	SetInputTypeF iTemp
+	ST Result
+
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=2)); **)
+	(* assign - Stmt *)
+	LD 2
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 3, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 3
+	SetInputTypeF iTemp
+	ST Result
+
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=3)); **)
+	(* assign - Stmt *)
+	LD 3
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 4, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 4
+	SetInputTypeF iTemp
+	ST Result
+
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=4)); **)
+	(* assign - Stmt *)
+	LD 4
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 5, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 5
+	SetInputTypeF iTemp
+	ST Result
+
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=5)); **)
+	(* assign - Stmt *)
+	LD 5
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 6, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 6
+	SetInputTypeF iTemp
+	ST Result
+
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=6)); **)
+	(* assign - Stmt *)
+	LD 6
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 7, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 7
+	SetInputTypeF iTemp
+	ST Result
+
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=7)); **)
+	(* assign - Stmt *)
+	LD 7
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 8, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 8
+	SetInputTypeF iTemp
+	ST Result
+
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=8)); **)
+	(* assign - Stmt *)
+	LD 8
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 9, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 9
+	SetInputTypeF iTemp
+	ST Result
+
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=9)); **)
+	(* assign - Stmt *)
+	LD 9
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 10, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 10
+	SetInputTypeF iTemp
+	ST Result
+
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=10)); **)
+	(* assign - Stmt *)
+	LD 10
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 11, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 11
+	SetInputTypeF iTemp
+	ST Result
+
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=11)); **)
+	(* assign - Stmt *)
+	LD 11
+	GetRegisterF 
+	WORD_TO_INT 
+	ST iTemp
+
+(** result := SetInputTypeF(Number := 12, InputType := iTemp); **)
+	(* assign - Stmt *)
+	LD 12
+	SetInputTypeF iTemp
+	ST Result
+
+(**  **)
+(** {* **)
+(** 0 = Resistive measurement (filtered) **)
+(** 1 = Voltage measurement **)
+(** 2 = Resistive measurement (unfiltered) Type 2 is similar to type 0, but input data is not filtered and therefore measurements are updated faster, but values can be more instable. **)
+(** 3 = Normally Open indication. With this input type, GetAnalogInputF returns 1 or 0. **)
+(** 4 = Normally Closed indication. With this input type, GetAnalogInputF returns 1 or 0. **)
+(** *} **)
+(**  **)
+(** inreg01 := WORD_TO_INT(GetRegisterF(RegNumber:=0)); **)
+	(* assign - Stmt *)
+	LD 0
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg01
+
+(** CASE inreg01 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000001_000000000000000:
+
+	(* case - Cond *)
+	LD inreg01
+	EQ 0
+	JMPC ODK_CASE_000000000000001_000000000000001
+
+	JMP ODK_SKIP_000000000000001_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000001_000000000000001:
+
+(**     in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1) / 10); **)
+		(* assign - Stmt *)
+		LD 1
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in01
+
+(** 	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01)); **)
+		(* assign - Stmt *)
+		LD 500
+		SetRegisterF ( in01
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000001
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000001_000000000000001:
+
+	(* case - Cond *)
+	LD inreg01
+	EQ 1
+	JMPC ODK_CASE_000000000000001_000000000000002
+
+	JMP ODK_SKIP_000000000000001_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000001_000000000000002:
+
+(**     in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1) / 1000); **)
+		(* assign - Stmt *)
+		LD 1
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in01
+
+(** 	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01)); **)
+		(* assign - Stmt *)
+		LD 500
+		SetRegisterF ( in01
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000001
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000001_000000000000002:
+
+	(* case - Cond *)
+	LD inreg01
+	EQ 2
+	JMPC ODK_CASE_000000000000001_000000000000003
+
+	JMP ODK_SKIP_000000000000001_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000001_000000000000003:
+
+(**     in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1) / 10); **)
+		(* assign - Stmt *)
+		LD 1
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in01
+
+(** 	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01)); **)
+		(* assign - Stmt *)
+		LD 500
+		SetRegisterF ( in01
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000001
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000001_000000000000003:
+
+	(* case - Cond *)
+	LD inreg01
+	EQ 3
+	JMPC ODK_CASE_000000000000001_000000000000004
+
+	JMP ODK_SKIP_000000000000001_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000001_000000000000004:
+
+(**     in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1)); **)
+		(* assign - Stmt *)
+		LD 1
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in01
+
+(**     Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01)); **)
+		(* assign - Stmt *)
+		LD 500
+		SetRegisterF ( in01
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000001
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000001_000000000000004:
+
+	(* case - Cond *)
+	LD inreg01
+	EQ 4
+	JMPC ODK_CASE_000000000000001_000000000000005
+
+	JMP ODK_SKIP_000000000000001_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000001_000000000000005:
+
+(**     in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1)); **)
+		(* assign - Stmt *)
+		LD 1
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in01
+
+(** 	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01)); **)
+		(* assign - Stmt *)
+		LD 500
+		SetRegisterF ( in01
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000001
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000001_000000000000005:
+
+	(* case - Cond *)
+	LD inreg01
+	EQ 10
+	JMPC ODK_CASE_000000000000001_000000000000006
+
+	JMP ODK_SKIP_000000000000001_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000001_000000000000006:
+
+(**     in01 := real_to_uint (GetNi1000LGMeasurementF (Number:=1)); **)
+		(* assign - Stmt *)
+		LD 1
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in01
+
+(** 	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01)); **)
+		(* assign - Stmt *)
+		LD 500
+		SetRegisterF ( in01
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000001
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000001_000000000000006:
+
+	(* case - Cond *)
+	LD inreg01
+	EQ 11
+	JMPC ODK_CASE_000000000000001_000000000000007
+
+	JMP ODK_SKIP_000000000000001_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000001_000000000000007:
+
+(** 	in01 := real_to_uint (GetOhmMeasurementF (Number:=1)); **)
+		(* assign - Stmt *)
+		LD 1
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in01
+
+(** 	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01)); **)
+		(* assign - Stmt *)
+		LD 500
+		SetRegisterF ( in01
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000001
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000001_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1) / 10); **)
+		(* assign - Stmt *)
+		LD 1
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in01
+
+(** 	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01)); **)
+		(* assign - Stmt *)
+		LD 500
+		SetRegisterF ( in01
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_000000000000001:
+
+(**  **)
+(** inreg02 := WORD_TO_INT(GetRegisterF(RegNumber:=1)); **)
+	(* assign - Stmt *)
+	LD 1
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg02
+
+(** CASE inreg02 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000002_000000000000000:
+
+	(* case - Cond *)
+	LD inreg02
+	EQ 0
+	JMPC ODK_CASE_000000000000002_000000000000001
+
+	JMP ODK_SKIP_000000000000002_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000002_000000000000001:
+
+(**     in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2) / 10); **)
+		(* assign - Stmt *)
+		LD 2
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in02
+
+(** 	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02)); **)
+		(* assign - Stmt *)
+		LD 501
+		SetRegisterF ( in02
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000002
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000002_000000000000001:
+
+	(* case - Cond *)
+	LD inreg02
+	EQ 1
+	JMPC ODK_CASE_000000000000002_000000000000002
+
+	JMP ODK_SKIP_000000000000002_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000002_000000000000002:
+
+(**     in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2) / 1000); **)
+		(* assign - Stmt *)
+		LD 2
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in02
+
+(** 	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02)); **)
+		(* assign - Stmt *)
+		LD 501
+		SetRegisterF ( in02
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000002
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000002_000000000000002:
+
+	(* case - Cond *)
+	LD inreg02
+	EQ 2
+	JMPC ODK_CASE_000000000000002_000000000000003
+
+	JMP ODK_SKIP_000000000000002_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000002_000000000000003:
+
+(**     in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2) / 10); **)
+		(* assign - Stmt *)
+		LD 2
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in02
+
+(** 	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02)); **)
+		(* assign - Stmt *)
+		LD 501
+		SetRegisterF ( in02
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000002
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000002_000000000000003:
+
+	(* case - Cond *)
+	LD inreg02
+	EQ 3
+	JMPC ODK_CASE_000000000000002_000000000000004
+
+	JMP ODK_SKIP_000000000000002_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000002_000000000000004:
+
+(**     in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2)); **)
+		(* assign - Stmt *)
+		LD 2
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in02
+
+(**     Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02)); **)
+		(* assign - Stmt *)
+		LD 501
+		SetRegisterF ( in02
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000002
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000002_000000000000004:
+
+	(* case - Cond *)
+	LD inreg02
+	EQ 4
+	JMPC ODK_CASE_000000000000002_000000000000005
+
+	JMP ODK_SKIP_000000000000002_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000002_000000000000005:
+
+(**     in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2)); **)
+		(* assign - Stmt *)
+		LD 2
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in02
+
+(** 	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02)); **)
+		(* assign - Stmt *)
+		LD 501
+		SetRegisterF ( in02
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000002
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000002_000000000000005:
+
+	(* case - Cond *)
+	LD inreg02
+	EQ 10
+	JMPC ODK_CASE_000000000000002_000000000000006
+
+	JMP ODK_SKIP_000000000000002_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000002_000000000000006:
+
+(**     in02 := real_to_uint (GetNi1000LGMeasurementF (Number:=2)); **)
+		(* assign - Stmt *)
+		LD 2
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in02
+
+(** 	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02)); **)
+		(* assign - Stmt *)
+		LD 501
+		SetRegisterF ( in02
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000002
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000002_000000000000006:
+
+	(* case - Cond *)
+	LD inreg02
+	EQ 11
+	JMPC ODK_CASE_000000000000002_000000000000007
+
+	JMP ODK_SKIP_000000000000002_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000002_000000000000007:
+
+(** 	in02 := real_to_uint (GetOhmMeasurementF (Number:=2)); **)
+		(* assign - Stmt *)
+		LD 2
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in02
+
+(** 	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02)); **)
+		(* assign - Stmt *)
+		LD 501
+		SetRegisterF ( in02
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000002
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000002_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2) / 10); **)
+		(* assign - Stmt *)
+		LD 2
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in02
+
+(** 	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02)); **)
+		(* assign - Stmt *)
+		LD 501
+		SetRegisterF ( in02
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_000000000000002:
+
+(**  **)
+(**  **)
+(** inreg03 := WORD_TO_INT(GetRegisterF(RegNumber:=2)); **)
+	(* assign - Stmt *)
+	LD 2
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg03
+
+(** CASE inreg03 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000003_000000000000000:
+
+	(* case - Cond *)
+	LD inreg03
+	EQ 0
+	JMPC ODK_CASE_000000000000003_000000000000001
+
+	JMP ODK_SKIP_000000000000003_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000003_000000000000001:
+
+(**     in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3) / 10); **)
+		(* assign - Stmt *)
+		LD 3
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in03
+
+(** 	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03)); **)
+		(* assign - Stmt *)
+		LD 502
+		SetRegisterF ( in03
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000003
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000003_000000000000001:
+
+	(* case - Cond *)
+	LD inreg03
+	EQ 1
+	JMPC ODK_CASE_000000000000003_000000000000002
+
+	JMP ODK_SKIP_000000000000003_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000003_000000000000002:
+
+(**     in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3) / 1000); **)
+		(* assign - Stmt *)
+		LD 3
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in03
+
+(** 	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03)); **)
+		(* assign - Stmt *)
+		LD 502
+		SetRegisterF ( in03
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000003
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000003_000000000000002:
+
+	(* case - Cond *)
+	LD inreg03
+	EQ 2
+	JMPC ODK_CASE_000000000000003_000000000000003
+
+	JMP ODK_SKIP_000000000000003_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000003_000000000000003:
+
+(**     in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3) / 10); **)
+		(* assign - Stmt *)
+		LD 3
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in03
+
+(** 	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03)); **)
+		(* assign - Stmt *)
+		LD 502
+		SetRegisterF ( in03
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000003
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000003_000000000000003:
+
+	(* case - Cond *)
+	LD inreg03
+	EQ 3
+	JMPC ODK_CASE_000000000000003_000000000000004
+
+	JMP ODK_SKIP_000000000000003_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000003_000000000000004:
+
+(**     in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3)); **)
+		(* assign - Stmt *)
+		LD 3
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in03
+
+(**     Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03)); **)
+		(* assign - Stmt *)
+		LD 502
+		SetRegisterF ( in03
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000003
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000003_000000000000004:
+
+	(* case - Cond *)
+	LD inreg03
+	EQ 4
+	JMPC ODK_CASE_000000000000003_000000000000005
+
+	JMP ODK_SKIP_000000000000003_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000003_000000000000005:
+
+(**     in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3)); **)
+		(* assign - Stmt *)
+		LD 3
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in03
+
+(** 	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03)); **)
+		(* assign - Stmt *)
+		LD 502
+		SetRegisterF ( in03
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000003
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000003_000000000000005:
+
+	(* case - Cond *)
+	LD inreg03
+	EQ 10
+	JMPC ODK_CASE_000000000000003_000000000000006
+
+	JMP ODK_SKIP_000000000000003_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000003_000000000000006:
+
+(**     in03 := real_to_uint (GetNi1000LGMeasurementF (Number:=3)); **)
+		(* assign - Stmt *)
+		LD 3
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in03
+
+(** 	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03)); **)
+		(* assign - Stmt *)
+		LD 502
+		SetRegisterF ( in03
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000003
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000003_000000000000006:
+
+	(* case - Cond *)
+	LD inreg03
+	EQ 11
+	JMPC ODK_CASE_000000000000003_000000000000007
+
+	JMP ODK_SKIP_000000000000003_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000003_000000000000007:
+
+(** 	in03 := real_to_uint (GetOhmMeasurementF (Number:=3)); **)
+		(* assign - Stmt *)
+		LD 3
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in03
+
+(** 	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03)); **)
+		(* assign - Stmt *)
+		LD 502
+		SetRegisterF ( in03
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000003
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000003_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3) / 10); **)
+		(* assign - Stmt *)
+		LD 3
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in03
+
+(** 	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03)); **)
+		(* assign - Stmt *)
+		LD 502
+		SetRegisterF ( in03
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_000000000000003:
+
+(**  **)
+(** inreg04 := WORD_TO_INT(GetRegisterF(RegNumber:=3)); **)
+	(* assign - Stmt *)
+	LD 3
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg04
+
+(** CASE inreg04 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000004_000000000000000:
+
+	(* case - Cond *)
+	LD inreg04
+	EQ 0
+	JMPC ODK_CASE_000000000000004_000000000000001
+
+	JMP ODK_SKIP_000000000000004_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000004_000000000000001:
+
+(**     in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4) / 10); **)
+		(* assign - Stmt *)
+		LD 4
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in04
+
+(** 	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04)); **)
+		(* assign - Stmt *)
+		LD 503
+		SetRegisterF ( in04
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000004
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000004_000000000000001:
+
+	(* case - Cond *)
+	LD inreg04
+	EQ 1
+	JMPC ODK_CASE_000000000000004_000000000000002
+
+	JMP ODK_SKIP_000000000000004_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000004_000000000000002:
+
+(**     in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4) / 1000); **)
+		(* assign - Stmt *)
+		LD 4
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in04
+
+(** 	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04)); **)
+		(* assign - Stmt *)
+		LD 503
+		SetRegisterF ( in04
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000004
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000004_000000000000002:
+
+	(* case - Cond *)
+	LD inreg04
+	EQ 2
+	JMPC ODK_CASE_000000000000004_000000000000003
+
+	JMP ODK_SKIP_000000000000004_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000004_000000000000003:
+
+(**     in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4) / 10); **)
+		(* assign - Stmt *)
+		LD 4
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in04
+
+(** 	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04)); **)
+		(* assign - Stmt *)
+		LD 503
+		SetRegisterF ( in04
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000004
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000004_000000000000003:
+
+	(* case - Cond *)
+	LD inreg04
+	EQ 3
+	JMPC ODK_CASE_000000000000004_000000000000004
+
+	JMP ODK_SKIP_000000000000004_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000004_000000000000004:
+
+(**     in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4)); **)
+		(* assign - Stmt *)
+		LD 4
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in04
+
+(**     Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04)); **)
+		(* assign - Stmt *)
+		LD 503
+		SetRegisterF ( in04
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000004
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000004_000000000000004:
+
+	(* case - Cond *)
+	LD inreg04
+	EQ 4
+	JMPC ODK_CASE_000000000000004_000000000000005
+
+	JMP ODK_SKIP_000000000000004_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000004_000000000000005:
+
+(**     in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4)); **)
+		(* assign - Stmt *)
+		LD 4
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in04
+
+(** 	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04)); **)
+		(* assign - Stmt *)
+		LD 503
+		SetRegisterF ( in04
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000004
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000004_000000000000005:
+
+	(* case - Cond *)
+	LD inreg04
+	EQ 10
+	JMPC ODK_CASE_000000000000004_000000000000006
+
+	JMP ODK_SKIP_000000000000004_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000004_000000000000006:
+
+(**     in04 := real_to_uint (GetNi1000LGMeasurementF (Number:=4)); **)
+		(* assign - Stmt *)
+		LD 4
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in04
+
+(** 	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04)); **)
+		(* assign - Stmt *)
+		LD 503
+		SetRegisterF ( in04
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000004
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000004_000000000000006:
+
+	(* case - Cond *)
+	LD inreg04
+	EQ 11
+	JMPC ODK_CASE_000000000000004_000000000000007
+
+	JMP ODK_SKIP_000000000000004_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000004_000000000000007:
+
+(** 	in04 := real_to_uint (GetOhmMeasurementF (Number:=4)); **)
+		(* assign - Stmt *)
+		LD 4
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in04
+
+(** 	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04)); **)
+		(* assign - Stmt *)
+		LD 503
+		SetRegisterF ( in04
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000004
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000004_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4) / 10); **)
+		(* assign - Stmt *)
+		LD 4
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in04
+
+(** 	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04)); **)
+		(* assign - Stmt *)
+		LD 503
+		SetRegisterF ( in04
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_000000000000004:
+
+(**  **)
+(** inreg05 := WORD_TO_INT(GetRegisterF(RegNumber:=4)); **)
+	(* assign - Stmt *)
+	LD 4
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg05
+
+(** CASE inreg05 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000005_000000000000000:
+
+	(* case - Cond *)
+	LD inreg05
+	EQ 0
+	JMPC ODK_CASE_000000000000005_000000000000001
+
+	JMP ODK_SKIP_000000000000005_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000005_000000000000001:
+
+(**     in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5) / 10); **)
+		(* assign - Stmt *)
+		LD 5
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in05
+
+(** 	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05)); **)
+		(* assign - Stmt *)
+		LD 504
+		SetRegisterF ( in05
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000005
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000005_000000000000001:
+
+	(* case - Cond *)
+	LD inreg05
+	EQ 1
+	JMPC ODK_CASE_000000000000005_000000000000002
+
+	JMP ODK_SKIP_000000000000005_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000005_000000000000002:
+
+(**     in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5) / 1000); **)
+		(* assign - Stmt *)
+		LD 5
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in05
+
+(** 	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05)); **)
+		(* assign - Stmt *)
+		LD 504
+		SetRegisterF ( in05
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000005
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000005_000000000000002:
+
+	(* case - Cond *)
+	LD inreg05
+	EQ 2
+	JMPC ODK_CASE_000000000000005_000000000000003
+
+	JMP ODK_SKIP_000000000000005_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000005_000000000000003:
+
+(**     in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5) / 10); **)
+		(* assign - Stmt *)
+		LD 5
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in05
+
+(** 	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05)); **)
+		(* assign - Stmt *)
+		LD 504
+		SetRegisterF ( in05
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000005
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000005_000000000000003:
+
+	(* case - Cond *)
+	LD inreg05
+	EQ 3
+	JMPC ODK_CASE_000000000000005_000000000000004
+
+	JMP ODK_SKIP_000000000000005_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000005_000000000000004:
+
+(**     in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5)); **)
+		(* assign - Stmt *)
+		LD 5
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in05
+
+(**     Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05)); **)
+		(* assign - Stmt *)
+		LD 504
+		SetRegisterF ( in05
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000005
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000005_000000000000004:
+
+	(* case - Cond *)
+	LD inreg05
+	EQ 4
+	JMPC ODK_CASE_000000000000005_000000000000005
+
+	JMP ODK_SKIP_000000000000005_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000005_000000000000005:
+
+(**     in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5)); **)
+		(* assign - Stmt *)
+		LD 5
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in05
+
+(** 	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05)); **)
+		(* assign - Stmt *)
+		LD 504
+		SetRegisterF ( in05
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000005
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000005_000000000000005:
+
+	(* case - Cond *)
+	LD inreg05
+	EQ 10
+	JMPC ODK_CASE_000000000000005_000000000000006
+
+	JMP ODK_SKIP_000000000000005_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000005_000000000000006:
+
+(**     in05 := real_to_uint (GetNi1000LGMeasurementF (Number:=5)); **)
+		(* assign - Stmt *)
+		LD 5
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in05
+
+(** 	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05)); **)
+		(* assign - Stmt *)
+		LD 504
+		SetRegisterF ( in05
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000005
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000005_000000000000006:
+
+	(* case - Cond *)
+	LD inreg05
+	EQ 11
+	JMPC ODK_CASE_000000000000005_000000000000007
+
+	JMP ODK_SKIP_000000000000005_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000005_000000000000007:
+
+(** 	in05 := real_to_uint (GetOhmMeasurementF (Number:=5)); **)
+		(* assign - Stmt *)
+		LD 5
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in05
+
+(** 	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05)); **)
+		(* assign - Stmt *)
+		LD 504
+		SetRegisterF ( in05
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000005
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000005_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5) / 10); **)
+		(* assign - Stmt *)
+		LD 5
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in05
+
+(** 	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05)); **)
+		(* assign - Stmt *)
+		LD 504
+		SetRegisterF ( in05
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_000000000000005:
+
+(**  **)
+(** inreg06 := WORD_TO_INT(GetRegisterF(RegNumber:=5)); **)
+	(* assign - Stmt *)
+	LD 5
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg06
+
+(** CASE inreg06 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000006_000000000000000:
+
+	(* case - Cond *)
+	LD inreg06
+	EQ 0
+	JMPC ODK_CASE_000000000000006_000000000000001
+
+	JMP ODK_SKIP_000000000000006_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000006_000000000000001:
+
+(**     in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6) / 10); **)
+		(* assign - Stmt *)
+		LD 6
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in06
+
+(** 	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06)); **)
+		(* assign - Stmt *)
+		LD 505
+		SetRegisterF ( in06
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000006
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000006_000000000000001:
+
+	(* case - Cond *)
+	LD inreg06
+	EQ 1
+	JMPC ODK_CASE_000000000000006_000000000000002
+
+	JMP ODK_SKIP_000000000000006_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000006_000000000000002:
+
+(**     in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6) / 1000); **)
+		(* assign - Stmt *)
+		LD 6
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in06
+
+(** 	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06)); **)
+		(* assign - Stmt *)
+		LD 505
+		SetRegisterF ( in06
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000006
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000006_000000000000002:
+
+	(* case - Cond *)
+	LD inreg06
+	EQ 2
+	JMPC ODK_CASE_000000000000006_000000000000003
+
+	JMP ODK_SKIP_000000000000006_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000006_000000000000003:
+
+(**     in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6) / 10); **)
+		(* assign - Stmt *)
+		LD 6
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in06
+
+(** 	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06)); **)
+		(* assign - Stmt *)
+		LD 505
+		SetRegisterF ( in06
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000006
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000006_000000000000003:
+
+	(* case - Cond *)
+	LD inreg06
+	EQ 3
+	JMPC ODK_CASE_000000000000006_000000000000004
+
+	JMP ODK_SKIP_000000000000006_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000006_000000000000004:
+
+(**     in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6)); **)
+		(* assign - Stmt *)
+		LD 6
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in06
+
+(**     Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06)); **)
+		(* assign - Stmt *)
+		LD 505
+		SetRegisterF ( in06
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000006
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000006_000000000000004:
+
+	(* case - Cond *)
+	LD inreg06
+	EQ 4
+	JMPC ODK_CASE_000000000000006_000000000000005
+
+	JMP ODK_SKIP_000000000000006_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000006_000000000000005:
+
+(**     in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6)); **)
+		(* assign - Stmt *)
+		LD 6
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in06
+
+(** 	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06)); **)
+		(* assign - Stmt *)
+		LD 505
+		SetRegisterF ( in06
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000006
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000006_000000000000005:
+
+	(* case - Cond *)
+	LD inreg06
+	EQ 10
+	JMPC ODK_CASE_000000000000006_000000000000006
+
+	JMP ODK_SKIP_000000000000006_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000006_000000000000006:
+
+(**     in06 := real_to_uint (GetNi1000LGMeasurementF (Number:=6)); **)
+		(* assign - Stmt *)
+		LD 6
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in06
+
+(** 	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06)); **)
+		(* assign - Stmt *)
+		LD 505
+		SetRegisterF ( in06
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000006
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000006_000000000000006:
+
+	(* case - Cond *)
+	LD inreg06
+	EQ 11
+	JMPC ODK_CASE_000000000000006_000000000000007
+
+	JMP ODK_SKIP_000000000000006_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000006_000000000000007:
+
+(** 	in06 := real_to_uint (GetOhmMeasurementF (Number:=6)); **)
+		(* assign - Stmt *)
+		LD 6
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in06
+
+(** 	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06)); **)
+		(* assign - Stmt *)
+		LD 505
+		SetRegisterF ( in06
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000006
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000006_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6) / 10); **)
+		(* assign - Stmt *)
+		LD 6
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in06
+
+(** 	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06)); **)
+		(* assign - Stmt *)
+		LD 505
+		SetRegisterF ( in06
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_000000000000006:
+
+(**  **)
+(**  **)
+(** inreg07 := WORD_TO_INT(GetRegisterF(RegNumber:=6)); **)
+	(* assign - Stmt *)
+	LD 6
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg07
+
+(** CASE inreg07 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000007_000000000000000:
+
+	(* case - Cond *)
+	LD inreg07
+	EQ 0
+	JMPC ODK_CASE_000000000000007_000000000000001
+
+	JMP ODK_SKIP_000000000000007_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000007_000000000000001:
+
+(**     in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7) / 10); **)
+		(* assign - Stmt *)
+		LD 7
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in07
+
+(** 	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07)); **)
+		(* assign - Stmt *)
+		LD 506
+		SetRegisterF ( in07
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000007
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000007_000000000000001:
+
+	(* case - Cond *)
+	LD inreg07
+	EQ 1
+	JMPC ODK_CASE_000000000000007_000000000000002
+
+	JMP ODK_SKIP_000000000000007_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000007_000000000000002:
+
+(**     in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7) / 1000); **)
+		(* assign - Stmt *)
+		LD 7
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in07
+
+(** 	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07)); **)
+		(* assign - Stmt *)
+		LD 506
+		SetRegisterF ( in07
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000007
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000007_000000000000002:
+
+	(* case - Cond *)
+	LD inreg07
+	EQ 2
+	JMPC ODK_CASE_000000000000007_000000000000003
+
+	JMP ODK_SKIP_000000000000007_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000007_000000000000003:
+
+(**     in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7) / 10); **)
+		(* assign - Stmt *)
+		LD 7
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in07
+
+(** 	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07)); **)
+		(* assign - Stmt *)
+		LD 506
+		SetRegisterF ( in07
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000007
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000007_000000000000003:
+
+	(* case - Cond *)
+	LD inreg07
+	EQ 3
+	JMPC ODK_CASE_000000000000007_000000000000004
+
+	JMP ODK_SKIP_000000000000007_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000007_000000000000004:
+
+(**     in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7)); **)
+		(* assign - Stmt *)
+		LD 7
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in07
+
+(**     Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07)); **)
+		(* assign - Stmt *)
+		LD 506
+		SetRegisterF ( in07
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000007
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000007_000000000000004:
+
+	(* case - Cond *)
+	LD inreg07
+	EQ 4
+	JMPC ODK_CASE_000000000000007_000000000000005
+
+	JMP ODK_SKIP_000000000000007_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000007_000000000000005:
+
+(**     in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7)); **)
+		(* assign - Stmt *)
+		LD 7
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in07
+
+(** 	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07)); **)
+		(* assign - Stmt *)
+		LD 506
+		SetRegisterF ( in07
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000007
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000007_000000000000005:
+
+	(* case - Cond *)
+	LD inreg07
+	EQ 10
+	JMPC ODK_CASE_000000000000007_000000000000006
+
+	JMP ODK_SKIP_000000000000007_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000007_000000000000006:
+
+(**     in07 := real_to_uint (GetNi1000LGMeasurementF (Number:=7)); **)
+		(* assign - Stmt *)
+		LD 7
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in07
+
+(** 	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07)); **)
+		(* assign - Stmt *)
+		LD 506
+		SetRegisterF ( in07
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000007
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000007_000000000000006:
+
+	(* case - Cond *)
+	LD inreg07
+	EQ 11
+	JMPC ODK_CASE_000000000000007_000000000000007
+
+	JMP ODK_SKIP_000000000000007_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000007_000000000000007:
+
+(** 	in07 := real_to_uint (GetOhmMeasurementF (Number:=7)); **)
+		(* assign - Stmt *)
+		LD 7
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in07
+
+(** 	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07)); **)
+		(* assign - Stmt *)
+		LD 506
+		SetRegisterF ( in07
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000007
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000007_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7) / 10); **)
+		(* assign - Stmt *)
+		LD 7
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in07
+
+(** 	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07)); **)
+		(* assign - Stmt *)
+		LD 506
+		SetRegisterF ( in07
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_000000000000007:
+
+(**  **)
+(** inreg08 := WORD_TO_INT(GetRegisterF(RegNumber:=7)); **)
+	(* assign - Stmt *)
+	LD 7
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg08
+
+(** CASE inreg08 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000008_000000000000000:
+
+	(* case - Cond *)
+	LD inreg08
+	EQ 0
+	JMPC ODK_CASE_000000000000008_000000000000001
+
+	JMP ODK_SKIP_000000000000008_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000008_000000000000001:
+
+(**     in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8) / 10); **)
+		(* assign - Stmt *)
+		LD 8
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in08
+
+(** 	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08)); **)
+		(* assign - Stmt *)
+		LD 507
+		SetRegisterF ( in08
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000008
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000008_000000000000001:
+
+	(* case - Cond *)
+	LD inreg08
+	EQ 1
+	JMPC ODK_CASE_000000000000008_000000000000002
+
+	JMP ODK_SKIP_000000000000008_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000008_000000000000002:
+
+(**     in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8) / 1000); **)
+		(* assign - Stmt *)
+		LD 8
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in08
+
+(** 	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08)); **)
+		(* assign - Stmt *)
+		LD 507
+		SetRegisterF ( in08
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000008
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000008_000000000000002:
+
+	(* case - Cond *)
+	LD inreg08
+	EQ 2
+	JMPC ODK_CASE_000000000000008_000000000000003
+
+	JMP ODK_SKIP_000000000000008_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000008_000000000000003:
+
+(**     in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8) / 10); **)
+		(* assign - Stmt *)
+		LD 8
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in08
+
+(** 	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08)); **)
+		(* assign - Stmt *)
+		LD 507
+		SetRegisterF ( in08
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000008
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000008_000000000000003:
+
+	(* case - Cond *)
+	LD inreg08
+	EQ 3
+	JMPC ODK_CASE_000000000000008_000000000000004
+
+	JMP ODK_SKIP_000000000000008_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000008_000000000000004:
+
+(**     in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8)); **)
+		(* assign - Stmt *)
+		LD 8
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in08
+
+(**     Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08)); **)
+		(* assign - Stmt *)
+		LD 507
+		SetRegisterF ( in08
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000008
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000008_000000000000004:
+
+	(* case - Cond *)
+	LD inreg08
+	EQ 4
+	JMPC ODK_CASE_000000000000008_000000000000005
+
+	JMP ODK_SKIP_000000000000008_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000008_000000000000005:
+
+(**     in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8)); **)
+		(* assign - Stmt *)
+		LD 8
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in08
+
+(** 	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08)); **)
+		(* assign - Stmt *)
+		LD 507
+		SetRegisterF ( in08
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000008
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000008_000000000000005:
+
+	(* case - Cond *)
+	LD inreg08
+	EQ 10
+	JMPC ODK_CASE_000000000000008_000000000000006
+
+	JMP ODK_SKIP_000000000000008_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000008_000000000000006:
+
+(**     in08 := real_to_uint (GetNi1000LGMeasurementF (Number:=8)); **)
+		(* assign - Stmt *)
+		LD 8
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in08
+
+(** 	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08)); **)
+		(* assign - Stmt *)
+		LD 507
+		SetRegisterF ( in08
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000008
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000008_000000000000006:
+
+	(* case - Cond *)
+	LD inreg08
+	EQ 11
+	JMPC ODK_CASE_000000000000008_000000000000007
+
+	JMP ODK_SKIP_000000000000008_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000008_000000000000007:
+
+(** 	in08 := real_to_uint (GetOhmMeasurementF (Number:=8)); **)
+		(* assign - Stmt *)
+		LD 8
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in08
+
+(** 	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08)); **)
+		(* assign - Stmt *)
+		LD 507
+		SetRegisterF ( in08
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000008
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000008_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8) / 10); **)
+		(* assign - Stmt *)
+		LD 8
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in08
+
+(** 	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08)); **)
+		(* assign - Stmt *)
+		LD 507
+		SetRegisterF ( in08
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_000000000000008:
+
+(**  **)
+(** inreg09 := WORD_TO_INT(GetRegisterF(RegNumber:=8)); **)
+	(* assign - Stmt *)
+	LD 8
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg09
+
+(** CASE inreg09 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000009_000000000000000:
+
+	(* case - Cond *)
+	LD inreg09
+	EQ 0
+	JMPC ODK_CASE_000000000000009_000000000000001
+
+	JMP ODK_SKIP_000000000000009_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000009_000000000000001:
+
+(**     in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9) / 10); **)
+		(* assign - Stmt *)
+		LD 9
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in09
+
+(** 	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09)); **)
+		(* assign - Stmt *)
+		LD 508
+		SetRegisterF ( in09
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000009
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000009_000000000000001:
+
+	(* case - Cond *)
+	LD inreg09
+	EQ 1
+	JMPC ODK_CASE_000000000000009_000000000000002
+
+	JMP ODK_SKIP_000000000000009_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000009_000000000000002:
+
+(**     in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9) / 1000); **)
+		(* assign - Stmt *)
+		LD 9
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in09
+
+(** 	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09)); **)
+		(* assign - Stmt *)
+		LD 508
+		SetRegisterF ( in09
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000009
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000009_000000000000002:
+
+	(* case - Cond *)
+	LD inreg09
+	EQ 2
+	JMPC ODK_CASE_000000000000009_000000000000003
+
+	JMP ODK_SKIP_000000000000009_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000009_000000000000003:
+
+(**     in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9) / 10); **)
+		(* assign - Stmt *)
+		LD 9
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in09
+
+(** 	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09)); **)
+		(* assign - Stmt *)
+		LD 508
+		SetRegisterF ( in09
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000009
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000009_000000000000003:
+
+	(* case - Cond *)
+	LD inreg09
+	EQ 3
+	JMPC ODK_CASE_000000000000009_000000000000004
+
+	JMP ODK_SKIP_000000000000009_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000009_000000000000004:
+
+(**     in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9)); **)
+		(* assign - Stmt *)
+		LD 9
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in09
+
+(**     Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09)); **)
+		(* assign - Stmt *)
+		LD 508
+		SetRegisterF ( in09
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000009
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000009_000000000000004:
+
+	(* case - Cond *)
+	LD inreg09
+	EQ 4
+	JMPC ODK_CASE_000000000000009_000000000000005
+
+	JMP ODK_SKIP_000000000000009_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000009_000000000000005:
+
+(**     in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9)); **)
+		(* assign - Stmt *)
+		LD 9
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in09
+
+(** 	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09)); **)
+		(* assign - Stmt *)
+		LD 508
+		SetRegisterF ( in09
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000009
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000009_000000000000005:
+
+	(* case - Cond *)
+	LD inreg09
+	EQ 10
+	JMPC ODK_CASE_000000000000009_000000000000006
+
+	JMP ODK_SKIP_000000000000009_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000009_000000000000006:
+
+(**     in09 := real_to_uint (GetNi1000LGMeasurementF (Number:=9)); **)
+		(* assign - Stmt *)
+		LD 9
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in09
+
+(** 	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09)); **)
+		(* assign - Stmt *)
+		LD 508
+		SetRegisterF ( in09
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000009
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_000000000000009_000000000000006:
+
+	(* case - Cond *)
+	LD inreg09
+	EQ 11
+	JMPC ODK_CASE_000000000000009_000000000000007
+
+	JMP ODK_SKIP_000000000000009_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_000000000000009_000000000000007:
+
+(** 	in09 := real_to_uint (GetOhmMeasurementF (Number:=9)); **)
+		(* assign - Stmt *)
+		LD 9
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in09
+
+(** 	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09)); **)
+		(* assign - Stmt *)
+		LD 508
+		SetRegisterF ( in09
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_000000000000009
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_000000000000009_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9) / 10); **)
+		(* assign - Stmt *)
+		LD 9
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in09
+
+(** 	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09)); **)
+		(* assign - Stmt *)
+		LD 508
+		SetRegisterF ( in09
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_000000000000009:
+
+(**  **)
+(** inreg10 := WORD_TO_INT(GetRegisterF(RegNumber:=9)); **)
+	(* assign - Stmt *)
+	LD 9
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg10
+
+(** CASE inreg10 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000A_000000000000000:
+
+	(* case - Cond *)
+	LD inreg10
+	EQ 0
+	JMPC ODK_CASE_00000000000000A_000000000000001
+
+	JMP ODK_SKIP_00000000000000A_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000A_000000000000001:
+
+(**     in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10) / 10); **)
+		(* assign - Stmt *)
+		LD 10
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in10
+
+(** 	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10)); **)
+		(* assign - Stmt *)
+		LD 509
+		SetRegisterF ( in10
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000A
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000A_000000000000001:
+
+	(* case - Cond *)
+	LD inreg10
+	EQ 1
+	JMPC ODK_CASE_00000000000000A_000000000000002
+
+	JMP ODK_SKIP_00000000000000A_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000A_000000000000002:
+
+(**     in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10) / 1000); **)
+		(* assign - Stmt *)
+		LD 10
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in10
+
+(** 	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10)); **)
+		(* assign - Stmt *)
+		LD 509
+		SetRegisterF ( in10
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000A
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000A_000000000000002:
+
+	(* case - Cond *)
+	LD inreg10
+	EQ 2
+	JMPC ODK_CASE_00000000000000A_000000000000003
+
+	JMP ODK_SKIP_00000000000000A_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000A_000000000000003:
+
+(**     in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10) / 10); **)
+		(* assign - Stmt *)
+		LD 10
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in10
+
+(** 	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10)); **)
+		(* assign - Stmt *)
+		LD 509
+		SetRegisterF ( in10
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000A
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000A_000000000000003:
+
+	(* case - Cond *)
+	LD inreg10
+	EQ 3
+	JMPC ODK_CASE_00000000000000A_000000000000004
+
+	JMP ODK_SKIP_00000000000000A_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000A_000000000000004:
+
+(**     in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10)); **)
+		(* assign - Stmt *)
+		LD 10
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in10
+
+(**     Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10)); **)
+		(* assign - Stmt *)
+		LD 509
+		SetRegisterF ( in10
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000A
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000A_000000000000004:
+
+	(* case - Cond *)
+	LD inreg10
+	EQ 4
+	JMPC ODK_CASE_00000000000000A_000000000000005
+
+	JMP ODK_SKIP_00000000000000A_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000A_000000000000005:
+
+(**     in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10)); **)
+		(* assign - Stmt *)
+		LD 10
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in10
+
+(** 	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10)); **)
+		(* assign - Stmt *)
+		LD 509
+		SetRegisterF ( in10
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000A
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000A_000000000000005:
+
+	(* case - Cond *)
+	LD inreg10
+	EQ 10
+	JMPC ODK_CASE_00000000000000A_000000000000006
+
+	JMP ODK_SKIP_00000000000000A_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000A_000000000000006:
+
+(**     in10 := real_to_uint (GetNi1000LGMeasurementF (Number:=10)); **)
+		(* assign - Stmt *)
+		LD 10
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in10
+
+(** 	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10)); **)
+		(* assign - Stmt *)
+		LD 509
+		SetRegisterF ( in10
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000A
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000A_000000000000006:
+
+	(* case - Cond *)
+	LD inreg10
+	EQ 11
+	JMPC ODK_CASE_00000000000000A_000000000000007
+
+	JMP ODK_SKIP_00000000000000A_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000A_000000000000007:
+
+(** 	in10 := real_to_uint (GetOhmMeasurementF (Number:=10)); **)
+		(* assign - Stmt *)
+		LD 10
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in10
+
+(** 	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10)); **)
+		(* assign - Stmt *)
+		LD 509
+		SetRegisterF ( in10
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000A
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_00000000000000A_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10) / 10); **)
+		(* assign - Stmt *)
+		LD 10
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in10
+
+(** 	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10)); **)
+		(* assign - Stmt *)
+		LD 509
+		SetRegisterF ( in10
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_00000000000000A:
+
+(**  **)
+(**  **)
+(** inreg11 := WORD_TO_INT(GetRegisterF(RegNumber:=10)); **)
+	(* assign - Stmt *)
+	LD 10
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg11
+
+(** CASE inreg11 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000B_000000000000000:
+
+	(* case - Cond *)
+	LD inreg11
+	EQ 0
+	JMPC ODK_CASE_00000000000000B_000000000000001
+
+	JMP ODK_SKIP_00000000000000B_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000B_000000000000001:
+
+(**     in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11) / 10); **)
+		(* assign - Stmt *)
+		LD 11
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in11
+
+(** 	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11)); **)
+		(* assign - Stmt *)
+		LD 510
+		SetRegisterF ( in11
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000B
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000B_000000000000001:
+
+	(* case - Cond *)
+	LD inreg11
+	EQ 1
+	JMPC ODK_CASE_00000000000000B_000000000000002
+
+	JMP ODK_SKIP_00000000000000B_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000B_000000000000002:
+
+(**     in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11) / 1000); **)
+		(* assign - Stmt *)
+		LD 11
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in11
+
+(** 	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11)); **)
+		(* assign - Stmt *)
+		LD 510
+		SetRegisterF ( in11
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000B
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000B_000000000000002:
+
+	(* case - Cond *)
+	LD inreg11
+	EQ 2
+	JMPC ODK_CASE_00000000000000B_000000000000003
+
+	JMP ODK_SKIP_00000000000000B_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000B_000000000000003:
+
+(**     in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11) / 10); **)
+		(* assign - Stmt *)
+		LD 11
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in11
+
+(** 	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11)); **)
+		(* assign - Stmt *)
+		LD 510
+		SetRegisterF ( in11
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000B
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000B_000000000000003:
+
+	(* case - Cond *)
+	LD inreg11
+	EQ 3
+	JMPC ODK_CASE_00000000000000B_000000000000004
+
+	JMP ODK_SKIP_00000000000000B_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000B_000000000000004:
+
+(**     in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11)); **)
+		(* assign - Stmt *)
+		LD 11
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in11
+
+(**     Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11)); **)
+		(* assign - Stmt *)
+		LD 510
+		SetRegisterF ( in11
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000B
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000B_000000000000004:
+
+	(* case - Cond *)
+	LD inreg11
+	EQ 4
+	JMPC ODK_CASE_00000000000000B_000000000000005
+
+	JMP ODK_SKIP_00000000000000B_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000B_000000000000005:
+
+(**     in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11)); **)
+		(* assign - Stmt *)
+		LD 11
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in11
+
+(** 	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11)); **)
+		(* assign - Stmt *)
+		LD 510
+		SetRegisterF ( in11
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000B
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000B_000000000000005:
+
+	(* case - Cond *)
+	LD inreg11
+	EQ 10
+	JMPC ODK_CASE_00000000000000B_000000000000006
+
+	JMP ODK_SKIP_00000000000000B_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000B_000000000000006:
+
+(**     in11 := real_to_uint (GetNi1000LGMeasurementF (Number:=11)); **)
+		(* assign - Stmt *)
+		LD 11
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in11
+
+(** 	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11)); **)
+		(* assign - Stmt *)
+		LD 510
+		SetRegisterF ( in11
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000B
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000B_000000000000006:
+
+	(* case - Cond *)
+	LD inreg11
+	EQ 11
+	JMPC ODK_CASE_00000000000000B_000000000000007
+
+	JMP ODK_SKIP_00000000000000B_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000B_000000000000007:
+
+(** 	in11 := real_to_uint (GetOhmMeasurementF (Number:=11)); **)
+		(* assign - Stmt *)
+		LD 11
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in11
+
+(** 	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11)); **)
+		(* assign - Stmt *)
+		LD 510
+		SetRegisterF ( in11
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000B
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_00000000000000B_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11) / 10); **)
+		(* assign - Stmt *)
+		LD 11
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in11
+
+(** 	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11)); **)
+		(* assign - Stmt *)
+		LD 510
+		SetRegisterF ( in11
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_00000000000000B:
+
+(**  **)
+(** inreg12 := WORD_TO_INT(GetRegisterF(RegNumber:=11)); **)
+	(* assign - Stmt *)
+	LD 11
+	GetRegisterF 
+	WORD_TO_INT 
+	ST inreg12
+
+(** CASE inreg12 OF **)
+(** 0: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000C_000000000000000:
+
+	(* case - Cond *)
+	LD inreg12
+	EQ 0
+	JMPC ODK_CASE_00000000000000C_000000000000001
+
+	JMP ODK_SKIP_00000000000000C_000000000000001
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000C_000000000000001:
+
+(**     in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12) / 10); **)
+		(* assign - Stmt *)
+		LD 12
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in12
+
+(** 	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12)); **)
+		(* assign - Stmt *)
+		LD 511
+		SetRegisterF ( in12
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000C
+
+(** 1: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000C_000000000000001:
+
+	(* case - Cond *)
+	LD inreg12
+	EQ 1
+	JMPC ODK_CASE_00000000000000C_000000000000002
+
+	JMP ODK_SKIP_00000000000000C_000000000000002
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000C_000000000000002:
+
+(**     in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12) / 1000); **)
+		(* assign - Stmt *)
+		LD 12
+		GetAnalogInputF 
+		DIV 1000
+		DINT_TO_UINT 
+		ST in12
+
+(** 	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12)); **)
+		(* assign - Stmt *)
+		LD 511
+		SetRegisterF ( in12
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000C
+
+(** 2: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000C_000000000000002:
+
+	(* case - Cond *)
+	LD inreg12
+	EQ 2
+	JMPC ODK_CASE_00000000000000C_000000000000003
+
+	JMP ODK_SKIP_00000000000000C_000000000000003
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000C_000000000000003:
+
+(**     in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12) / 10); **)
+		(* assign - Stmt *)
+		LD 12
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in12
+
+(** 	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12)); **)
+		(* assign - Stmt *)
+		LD 511
+		SetRegisterF ( in12
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000C
+
+(** 3: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000C_000000000000003:
+
+	(* case - Cond *)
+	LD inreg12
+	EQ 3
+	JMPC ODK_CASE_00000000000000C_000000000000004
+
+	JMP ODK_SKIP_00000000000000C_000000000000004
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000C_000000000000004:
+
+(**     in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12)); **)
+		(* assign - Stmt *)
+		LD 12
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in12
+
+(**     Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12)); **)
+		(* assign - Stmt *)
+		LD 511
+		SetRegisterF ( in12
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000C
+
+(** 4: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000C_000000000000004:
+
+	(* case - Cond *)
+	LD inreg12
+	EQ 4
+	JMPC ODK_CASE_00000000000000C_000000000000005
+
+	JMP ODK_SKIP_00000000000000C_000000000000005
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000C_000000000000005:
+
+(**     in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12)); **)
+		(* assign - Stmt *)
+		LD 12
+		GetAnalogInputF 
+		DINT_TO_UINT 
+		ST in12
+
+(** 	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12)); **)
+		(* assign - Stmt *)
+		LD 511
+		SetRegisterF ( in12
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000C
+
+(** 10: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000C_000000000000005:
+
+	(* case - Cond *)
+	LD inreg12
+	EQ 10
+	JMPC ODK_CASE_00000000000000C_000000000000006
+
+	JMP ODK_SKIP_00000000000000C_000000000000006
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000C_000000000000006:
+
+(**     in12 := real_to_uint (GetNi1000LGMeasurementF (Number:=12)); **)
+		(* assign - Stmt *)
+		LD 12
+		GetNi1000LGMeasurementF 
+		real_to_uint 
+		ST in12
+
+(** 	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12)); **)
+		(* assign - Stmt *)
+		LD 511
+		SetRegisterF ( in12
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000C
+
+(** 11: **)
+	(* case - Elm *) 
+	ODK_SKIP_00000000000000C_000000000000006:
+
+	(* case - Cond *)
+	LD inreg12
+	EQ 11
+	JMPC ODK_CASE_00000000000000C_000000000000007
+
+	JMP ODK_SKIP_00000000000000C_000000000000007
+
+	(* case - Stmts *) 
+	ODK_CASE_00000000000000C_000000000000007:
+
+(** 	in12 := real_to_uint (GetOhmMeasurementF (Number:=12)); **)
+		(* assign - Stmt *)
+		LD 12
+		GetOhmMeasurementF 
+		real_to_uint 
+		ST in12
+
+(** 	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12)); **)
+		(* assign - Stmt *)
+		LD 511
+		SetRegisterF ( in12
+				UINT_TO_WORD 
+			)
+		ST Result
+
+		JMP ODK_END_CASE_00000000000000C
+
+(**  **)
+(** ELSE **)
+	(* else *) 
+	ODK_SKIP_00000000000000C_000000000000007:
+
+		(* else - Statements *) 
+
+(**     in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12) / 10); **)
+		(* assign - Stmt *)
+		LD 12
+		GetAnalogInputF 
+		DIV 10
+		DINT_TO_UINT 
+		ST in12
+
+(** 	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12)); **)
+		(* assign - Stmt *)
+		LD 511
+		SetRegisterF ( in12
+				UINT_TO_WORD 
+			)
+		ST Result
+
+(** END_CASE; **)
+	(* case - End *) 
+	ODK_END_CASE_00000000000000C:
+
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(** {*Extra Docs ->*} **)
+(**  **)
+(** {*Registers 0-> are written from master to the slave*} **)
+(**  **)
+(** {*Write the measurement types*} **)
+(**  **)
+(** {* here, the input type is selected / written by the Modbus master following these numbers: **)
+(** 0 = Resistive measurement (filtered) **)
+(** 1 = Voltage measurement **)
+(** 2 = Resistive measurement (unfiltered) Type 2 is similar to type 0, but input data is not filtered and therefore measurements are updated faster, but values can be more instable. **)
+(** 3 = Normally Open indication. With this input type, GetAnalogInputF returns 1 or 0. **)
+(** 4 = Normally Closed indication. With this input type, GetAnalogInputF returns 1 or 0. **)
+(** 5 = Impulse measurement. The minimum pulse length is 25 milliseconds. (See the functions GetPulseCounterF and SetPulseCounterF for how to read pulse values.) **)
+(** 6 = Fast impulse measurement. The minimum pulse length is 1 millisecond.  **)
+(**  **)
+(** Note this must be set correctly to be able to read correct measurement values!! *} **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(**  **)
+(** {* Continuation can be done for different input types with these firmware functions: **)
+(** Voltage_Measurement_Value := GetVoltageMeasurementF (InputNumber:=2, minVoltage:=2.0, maxVoltage:=10.0, minValue:=0.0, maxValue:=500.0); **)
+(** 	Return_value [REAL] := GetVoltageMeasurementF (InputNumber [USINT], minVoltage [REAL], maxVoltage [REAL], minValue [REAL], maxValue [REAL]); **)
+(** 	 **)
+(** PulseCount_3 := GetPulseCounterF (3); **)
+(** 	Return_value [UDINT] := GetPulseCounterF (InputNumber [USINT]); **)
+(** 	 **)
+(** 	Here, the pulse counter can be set using: **)
+(** 	PulseCount_3 := SetPulseCounterF (InputNumber:=3, 123456); **)
+(** 		Return_value [INT] := SetPulseCounterF (InputNumber [USINT], PulseCount [UDINT]); **)
+(**  **)
+(** Meas_5 := GetNtc20MeasurementF (InputNumber:=5); **)
+(** 	Return_value [REAL] := GetNtc20MeasurementF (InputNumber [INT]); **)
+(**  **)
+(** Meas_6 := GetPt1000MeasurementF (6); **)
+(** 	Return_value [REAL] := GetPt1000MeasurementF (InputNumber [INT]); **)
+(** 	 **)
+(** Meas_7 := GetNi1000LGMeasurementF (InputNumber:=7); **)
+(** 	Return_value [REAL] := GetNi1000LGMeasurementF (InputNumber [INT]); **)
+(** 	 **)
+(** Meas_8 := GetOhmMeasurementF (InputNumber:=8); **)
+(** 	Return_value [REAL] := GetOhmMeasurementF (InputNumber [INT]); **)
+(** 	 **)
+(** Meas_9 := GetRelativeDeflectionF (InputNumber:=9); **)
+(** 	Return_value [INT] := GetRelativeDeflectionF (InputNumber [USINT]); **)
+(** 	(Returns a deflection from a 10kOhm potentiometer scaled between -100 and +100) **)
+(**  **)
+(** Meas_10 := GetDeflectionF (10, DeflectionArea:=37.5); **)
+(** 	Return_value [REAL] := GetDeflectionF (InputNumber [USINT], DeflectionArea [REAL]); **)
+(** 	(Returns a deflection from a 10 kOhm potentiometer scaled between minus DeflectionArea and plus DeflectionArea) **)
+(** *} **)
+(**  **)
+(**  **)
+(** {*Write DO points*} **)
+(** {*Result := SetDigitalOutputF(Number:=1, Value := BOOL_TO_INT(GetRegisterF(RegNumber:=12) > 0)); **)
+(** Result := SetDigitalOutputF(Number:=2, Value := BOOL_TO_INT(GetRegisterF(RegNumber:=13) > 0)); **)
+(** Result := SetDigitalOutputF(Number:=3, Value := BOOL_TO_INT(GetRegisterF(RegNumber:=14) > 0)); **)
+(** Result := SetDigitalOutputF(Number:=4, Value := BOOL_TO_INT(GetRegisterF(RegNumber:=15) > 0));*} **)
+(**  **)
+(** {*Write the analog outputs, register value 10000 means 100% output*} **)
+(** {*iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=16)); **)
+(** rTemp := INT_TO_REAL(iTemp) / 100.0; **)
+(** Result := SetAnalogOutputF(Number:=1, Value := rTemp); **)
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=17)); **)
+(** rTemp := INT_TO_REAL(iTemp) / 100.0; **)
+(** Result := SetAnalogOutputF(Number:=2, Value := rTemp); **)
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=18)); **)
+(** rTemp := INT_TO_REAL(iTemp) / 100.0; **)
+(** Result := SetAnalogOutputF(Number:=3, Value := rTemp); **)
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=19)); **)
+(** rTemp := INT_TO_REAL(iTemp) / 100.0; **)
+(** Result := SetAnalogOutputF(Number:=4, Value := rTemp); **)
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=20)); **)
+(** rTemp := INT_TO_REAL(iTemp) / 100.0; **)
+(** Result := SetAnalogOutputF(Number:=5, Value := rTemp); **)
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=21)); **)
+(** rTemp := INT_TO_REAL(iTemp) / 100.0; **)
+(** Result := SetAnalogOutputF(Number:=6, Value := rTemp); **)
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=22)); **)
+(** rTemp := INT_TO_REAL(iTemp) / 100.0; **)
+(** Result := SetAnalogOutputF(Number:=7, Value := rTemp); **)
+(** iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=23)); **)
+(** rTemp := INT_TO_REAL(iTemp) / 100.0; **)
+(** Result := SetAnalogOutputF(Number:=8, Value := rTemp);*} **)
+
+END_PROGRAM

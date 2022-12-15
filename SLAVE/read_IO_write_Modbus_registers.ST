@@ -1,0 +1,510 @@
+PROGRAM read_IO_write_Modbus_registers
+VAR
+init, result, iTemp, iTemp2 : int;
+in01,in02,in03,in04,in05,in06,in07,in08,in09,in10,in11,in12: uint;
+inreg01,inreg02,inreg03,inreg04,inreg05,inreg06,inreg07,inreg08,inreg09,inreg10,inreg11,inreg12: int;
+wTemp : word;
+diTemp : DINT;
+uiTemp : uint;
+rTemp : real;
+NTC10_meas : INT ;
+END_VAR
+
+(*JHM Jonker - 08-12-2022*)
+
+
+(*0 - 12 settings per analog input*)
+(*500 - 511 get value from analog input and put in register*)
+(*512 - 523 reserved for input*)
+(*524 - Sweep*)
+
+Result := SetRegisterF ( Number := 1001, Value := 36 ) ;
+
+(*IO Settings*)
+
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=0));
+result := SetInputTypeF(Number := 1, InputType := iTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=1));
+result := SetInputTypeF(Number := 2, InputType := iTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=2));
+result := SetInputTypeF(Number := 3, InputType := iTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=3));
+result := SetInputTypeF(Number := 4, InputType := iTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=4));
+result := SetInputTypeF(Number := 5, InputType := iTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=5));
+result := SetInputTypeF(Number := 6, InputType := iTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=6));
+result := SetInputTypeF(Number := 7, InputType := iTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=7));
+result := SetInputTypeF(Number := 8, InputType := iTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=8));
+result := SetInputTypeF(Number := 9, InputType := iTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=9));
+result := SetInputTypeF(Number := 10, InputType := iTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=10));
+result := SetInputTypeF(Number := 11, InputType := iTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=11));
+result := SetInputTypeF(Number := 12, InputType := iTemp);
+
+(*
+0 = Resistive measurement (filtered)
+1 = Voltage measurement
+2 = Resistive measurement (unfiltered) Type 2 is similar to type 0, but input data is not filtered and therefore measurements are updated faster, but values can be more instable.
+3 = Normally Open indication. With this input type, GetAnalogInputF returns 1 or 0.
+4 = Normally Closed indication. With this input type, GetAnalogInputF returns 1 or 0.
+*)
+
+inreg01 := WORD_TO_INT(GetRegisterF(RegNumber:=0));
+CASE inreg01 OF
+0:
+    in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1) / 10);
+	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01));
+1:
+    in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1) / 1000);
+	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01));
+2:
+    in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1) / 10);
+	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01));
+3:
+    in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1));
+    Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01));
+4:
+    in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1));
+	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01));
+10:
+    in01 := real_to_uint (GetNi1000LGMeasurementF (Number:=1));
+	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01));
+11:
+	in01 := real_to_uint (GetOhmMeasurementF (Number:=1));
+	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01));
+
+ELSE
+    in01 := DINT_TO_UINT(GetAnalogInputF(Number:=1) / 10);
+	Result := SetRegisterF(RegNumber := 500, RegValue := UINT_TO_WORD(in01));
+END_CASE;
+
+inreg02 := WORD_TO_INT(GetRegisterF(RegNumber:=1));
+CASE inreg02 OF
+0:
+    in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2) / 10);
+	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02));
+1:
+    in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2) / 1000);
+	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02));
+2:
+    in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2) / 10);
+	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02));
+3:
+    in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2));
+    Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02));
+4:
+    in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2));
+	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02));
+10:
+    in02 := real_to_uint (GetNi1000LGMeasurementF (Number:=2));
+	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02));
+11:
+	in02 := real_to_uint (GetOhmMeasurementF (Number:=2));
+	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02));
+
+ELSE
+    in02 := DINT_TO_UINT(GetAnalogInputF(Number:=2) / 10);
+	Result := SetRegisterF(RegNumber := 501, RegValue := UINT_TO_WORD(in02));
+END_CASE;
+
+
+inreg03 := WORD_TO_INT(GetRegisterF(RegNumber:=2));
+CASE inreg03 OF
+0:
+    in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3) / 10);
+	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03));
+1:
+    in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3) / 1000);
+	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03));
+2:
+    in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3) / 10);
+	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03));
+3:
+    in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3));
+    Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03));
+4:
+    in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3));
+	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03));
+10:
+    in03 := real_to_uint (GetNi1000LGMeasurementF (Number:=3));
+	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03));
+11:
+	in03 := real_to_uint (GetOhmMeasurementF (Number:=3));
+	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03));
+
+ELSE
+    in03 := DINT_TO_UINT(GetAnalogInputF(Number:=3) / 10);
+	Result := SetRegisterF(RegNumber := 502, RegValue := UINT_TO_WORD(in03));
+END_CASE;
+
+inreg04 := WORD_TO_INT(GetRegisterF(RegNumber:=3));
+CASE inreg04 OF
+0:
+    in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4) / 10);
+	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04));
+1:
+    in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4) / 1000);
+	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04));
+2:
+    in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4) / 10);
+	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04));
+3:
+    in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4));
+    Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04));
+4:
+    in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4));
+	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04));
+10:
+    in04 := real_to_uint (GetNi1000LGMeasurementF (Number:=4));
+	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04));
+11:
+	in04 := real_to_uint (GetOhmMeasurementF (Number:=4));
+	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04));
+
+ELSE
+    in04 := DINT_TO_UINT(GetAnalogInputF(Number:=4) / 10);
+	Result := SetRegisterF(RegNumber := 503, RegValue := UINT_TO_WORD(in04));
+END_CASE;
+
+inreg05 := WORD_TO_INT(GetRegisterF(RegNumber:=4));
+CASE inreg05 OF
+0:
+    in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5) / 10);
+	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05));
+1:
+    in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5) / 1000);
+	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05));
+2:
+    in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5) / 10);
+	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05));
+3:
+    in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5));
+    Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05));
+4:
+    in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5));
+	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05));
+10:
+    in05 := real_to_uint (GetNi1000LGMeasurementF (Number:=5));
+	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05));
+11:
+	in05 := real_to_uint (GetOhmMeasurementF (Number:=5));
+	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05));
+
+ELSE
+    in05 := DINT_TO_UINT(GetAnalogInputF(Number:=5) / 10);
+	Result := SetRegisterF(RegNumber := 504, RegValue := UINT_TO_WORD(in05));
+END_CASE;
+
+inreg06 := WORD_TO_INT(GetRegisterF(RegNumber:=5));
+CASE inreg06 OF
+0:
+    in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6) / 10);
+	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06));
+1:
+    in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6) / 1000);
+	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06));
+2:
+    in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6) / 10);
+	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06));
+3:
+    in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6));
+    Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06));
+4:
+    in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6));
+	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06));
+10:
+    in06 := real_to_uint (GetNi1000LGMeasurementF (Number:=6));
+	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06));
+11:
+	in06 := real_to_uint (GetOhmMeasurementF (Number:=6));
+	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06));
+
+ELSE
+    in06 := DINT_TO_UINT(GetAnalogInputF(Number:=6) / 10);
+	Result := SetRegisterF(RegNumber := 505, RegValue := UINT_TO_WORD(in06));
+END_CASE;
+
+
+inreg07 := WORD_TO_INT(GetRegisterF(RegNumber:=6));
+CASE inreg07 OF
+0:
+    in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7) / 10);
+	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07));
+1:
+    in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7) / 1000);
+	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07));
+2:
+    in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7) / 10);
+	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07));
+3:
+    in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7));
+    Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07));
+4:
+    in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7));
+	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07));
+10:
+    in07 := real_to_uint (GetNi1000LGMeasurementF (Number:=7));
+	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07));
+11:
+	in07 := real_to_uint (GetOhmMeasurementF (Number:=7));
+	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07));
+
+ELSE
+    in07 := DINT_TO_UINT(GetAnalogInputF(Number:=7) / 10);
+	Result := SetRegisterF(RegNumber := 506, RegValue := UINT_TO_WORD(in07));
+END_CASE;
+
+inreg08 := WORD_TO_INT(GetRegisterF(RegNumber:=7));
+CASE inreg08 OF
+0:
+    in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8) / 10);
+	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08));
+1:
+    in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8) / 1000);
+	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08));
+2:
+    in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8) / 10);
+	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08));
+3:
+    in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8));
+    Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08));
+4:
+    in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8));
+	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08));
+10:
+    in08 := real_to_uint (GetNi1000LGMeasurementF (Number:=8));
+	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08));
+11:
+	in08 := real_to_uint (GetOhmMeasurementF (Number:=8));
+	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08));
+
+ELSE
+    in08 := DINT_TO_UINT(GetAnalogInputF(Number:=8) / 10);
+	Result := SetRegisterF(RegNumber := 507, RegValue := UINT_TO_WORD(in08));
+END_CASE;
+
+inreg09 := WORD_TO_INT(GetRegisterF(RegNumber:=8));
+CASE inreg09 OF
+0:
+    in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9) / 10);
+	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09));
+1:
+    in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9) / 1000);
+	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09));
+2:
+    in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9) / 10);
+	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09));
+3:
+    in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9));
+    Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09));
+4:
+    in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9));
+	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09));
+10:
+    in09 := real_to_uint (GetNi1000LGMeasurementF (Number:=9));
+	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09));
+11:
+	in09 := real_to_uint (GetOhmMeasurementF (Number:=9));
+	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09));
+
+ELSE
+    in09 := DINT_TO_UINT(GetAnalogInputF(Number:=9) / 10);
+	Result := SetRegisterF(RegNumber := 508, RegValue := UINT_TO_WORD(in09));
+END_CASE;
+
+inreg10 := WORD_TO_INT(GetRegisterF(RegNumber:=9));
+CASE inreg10 OF
+0:
+    in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10) / 10);
+	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10));
+1:
+    in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10) / 1000);
+	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10));
+2:
+    in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10) / 10);
+	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10));
+3:
+    in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10));
+    Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10));
+4:
+    in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10));
+	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10));
+10:
+    in10 := real_to_uint (GetNi1000LGMeasurementF (Number:=10));
+	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10));
+11:
+	in10 := real_to_uint (GetOhmMeasurementF (Number:=10));
+	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10));
+
+ELSE
+    in10 := DINT_TO_UINT(GetAnalogInputF(Number:=10) / 10);
+	Result := SetRegisterF(RegNumber := 509, RegValue := UINT_TO_WORD(in10));
+END_CASE;
+
+
+inreg11 := WORD_TO_INT(GetRegisterF(RegNumber:=10));
+CASE inreg11 OF
+0:
+    in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11) / 10);
+	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11));
+1:
+    in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11) / 1000);
+	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11));
+2:
+    in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11) / 10);
+	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11));
+3:
+    in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11));
+    Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11));
+4:
+    in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11));
+	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11));
+10:
+    in11 := real_to_uint (GetNi1000LGMeasurementF (Number:=11));
+	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11));
+11:
+	in11 := real_to_uint (GetOhmMeasurementF (Number:=11));
+	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11));
+
+ELSE
+    in11 := DINT_TO_UINT(GetAnalogInputF(Number:=11) / 10);
+	Result := SetRegisterF(RegNumber := 510, RegValue := UINT_TO_WORD(in11));
+END_CASE;
+
+inreg12 := WORD_TO_INT(GetRegisterF(RegNumber:=11));
+CASE inreg12 OF
+0:
+    in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12) / 10);
+	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12));
+1:
+    in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12) / 1000);
+	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12));
+2:
+    in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12) / 10);
+	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12));
+3:
+    in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12));
+    Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12));
+4:
+    in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12));
+	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12));
+10:
+    in12 := real_to_uint (GetNi1000LGMeasurementF (Number:=12));
+	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12));
+11:
+	in12 := real_to_uint (GetOhmMeasurementF (Number:=12));
+	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12));
+
+ELSE
+    in12 := DINT_TO_UINT(GetAnalogInputF(Number:=12) / 10);
+	Result := SetRegisterF(RegNumber := 511, RegValue := UINT_TO_WORD(in12));
+END_CASE;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(*Extra Docs ->*)
+
+(*Registers 0-> are written from master to the slave*)
+
+(*Write the measurement types*)
+
+(* here, the input type is selected / written by the Modbus master following these numbers:
+0 = Resistive measurement (filtered)
+1 = Voltage measurement
+2 = Resistive measurement (unfiltered) Type 2 is similar to type 0, but input data is not filtered and therefore measurements are updated faster, but values can be more instable.
+3 = Normally Open indication. With this input type, GetAnalogInputF returns 1 or 0.
+4 = Normally Closed indication. With this input type, GetAnalogInputF returns 1 or 0.
+5 = Impulse measurement. The minimum pulse length is 25 milliseconds. (See the functions GetPulseCounterF and SetPulseCounterF for how to read pulse values.)
+6 = Fast impulse measurement. The minimum pulse length is 1 millisecond. 
+
+Note this must be set correctly to be able to read correct measurement values!! *)
+
+
+
+
+
+(* Continuation can be done for different input types with these firmware functions:
+Voltage_Measurement_Value := GetVoltageMeasurementF (InputNumber:=2, minVoltage:=2.0, maxVoltage:=10.0, minValue:=0.0, maxValue:=500.0);
+	Return_value [REAL] := GetVoltageMeasurementF (InputNumber [USINT], minVoltage [REAL], maxVoltage [REAL], minValue [REAL], maxValue [REAL]);
+	
+PulseCount_3 := GetPulseCounterF (3);
+	Return_value [UDINT] := GetPulseCounterF (InputNumber [USINT]);
+	
+	Here, the pulse counter can be set using:
+	PulseCount_3 := SetPulseCounterF (InputNumber:=3, 123456);
+		Return_value [INT] := SetPulseCounterF (InputNumber [USINT], PulseCount [UDINT]);
+
+Meas_5 := GetNtc20MeasurementF (InputNumber:=5);
+	Return_value [REAL] := GetNtc20MeasurementF (InputNumber [INT]);
+
+Meas_6 := GetPt1000MeasurementF (6);
+	Return_value [REAL] := GetPt1000MeasurementF (InputNumber [INT]);
+	
+Meas_7 := GetNi1000LGMeasurementF (InputNumber:=7);
+	Return_value [REAL] := GetNi1000LGMeasurementF (InputNumber [INT]);
+	
+Meas_8 := GetOhmMeasurementF (InputNumber:=8);
+	Return_value [REAL] := GetOhmMeasurementF (InputNumber [INT]);
+	
+Meas_9 := GetRelativeDeflectionF (InputNumber:=9);
+	Return_value [INT] := GetRelativeDeflectionF (InputNumber [USINT]);
+	(Returns a deflection from a 10kOhm potentiometer scaled between -100 and +100)
+
+Meas_10 := GetDeflectionF (10, DeflectionArea:=37.5);
+	Return_value [REAL] := GetDeflectionF (InputNumber [USINT], DeflectionArea [REAL]);
+	(Returns a deflection from a 10 kOhm potentiometer scaled between minus DeflectionArea and plus DeflectionArea)
+*)
+
+
+(*Write DO points*)
+(*Result := SetDigitalOutputF(Number:=1, Value := BOOL_TO_INT(GetRegisterF(RegNumber:=12) > 0));
+Result := SetDigitalOutputF(Number:=2, Value := BOOL_TO_INT(GetRegisterF(RegNumber:=13) > 0));
+Result := SetDigitalOutputF(Number:=3, Value := BOOL_TO_INT(GetRegisterF(RegNumber:=14) > 0));
+Result := SetDigitalOutputF(Number:=4, Value := BOOL_TO_INT(GetRegisterF(RegNumber:=15) > 0));*)
+
+(*Write the analog outputs, register value 10000 means 100% output*)
+(*iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=16));
+rTemp := INT_TO_REAL(iTemp) / 100.0;
+Result := SetAnalogOutputF(Number:=1, Value := rTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=17));
+rTemp := INT_TO_REAL(iTemp) / 100.0;
+Result := SetAnalogOutputF(Number:=2, Value := rTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=18));
+rTemp := INT_TO_REAL(iTemp) / 100.0;
+Result := SetAnalogOutputF(Number:=3, Value := rTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=19));
+rTemp := INT_TO_REAL(iTemp) / 100.0;
+Result := SetAnalogOutputF(Number:=4, Value := rTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=20));
+rTemp := INT_TO_REAL(iTemp) / 100.0;
+Result := SetAnalogOutputF(Number:=5, Value := rTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=21));
+rTemp := INT_TO_REAL(iTemp) / 100.0;
+Result := SetAnalogOutputF(Number:=6, Value := rTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=22));
+rTemp := INT_TO_REAL(iTemp) / 100.0;
+Result := SetAnalogOutputF(Number:=7, Value := rTemp);
+iTemp := WORD_TO_INT(GetRegisterF(RegNumber:=23));
+rTemp := INT_TO_REAL(iTemp) / 100.0;
+Result := SetAnalogOutputF(Number:=8, Value := rTemp);*)
+END_PROGRAM
